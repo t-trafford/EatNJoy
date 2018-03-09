@@ -1,0 +1,52 @@
+<form name="form" ng-submit="vm.saveItem(form,$close)" novalidate>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Add/Edit Product</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+
+    <div class="form-group">
+      <label for="nameI">Name: </label>
+      <input type="text" class="form-control is-invalid" required name="nameI" ng-model="vm.newItem.name">
+      <div class="invalid-feedback" ng-show="form.$submitted && form.nameI.$invalid">
+        <span class="error" ng-show="form.nameI.$error.required">Name is required.</span>
+      </div>
+    </div>
+
+    <!-- <div class="form-group">
+        <input name="myFile" type="file" class="form-control"/>
+        <input name="width" value="50%" style="display: none"/>
+        <input name="widgetId" value="123" style="display: none"/>
+        <br>
+        <button type="submit" class="btn-btn-block btn-primary">Upload Image</button>
+      </div> -->
+
+    <div class="form-group">
+      <label for="foodItemName">Item Name: </label>
+      <input type="text" class="form-control" name="foodItemName" ng-model="vm.newItem.foodItemName" required>
+
+      <div class="invalid-feedback" ng-show="form.$submitted && form.foodItemName.$invalid">
+        <span class="error" ng-show="form.foodItemName.$error.required">Item Name is required.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="price">Price: </label>
+      <input type="number" class="form-control" name="price" ng-model="vm.newItem.price" required>
+
+      <div class="invalid-feedback" ng-show="form.$submitted && form.price.$invalid">
+        <span class="error" ng-show="form.price.$error.required">Price is required.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ingredients">Ingredients: </label>
+      <textarea name="ingredients" class="form-control" ng-model="vm.newItem.ingredients" rows="4"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="status">Status: </label>
+      <input type="checkbox" name="status" ng-model="vm.newItem.active"> Is Active
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="submit">Save</button>
+    <button class="btn btn-warning" type="button" ng-click="$dismiss()">Cancel</button>
+  </div>
+</form>

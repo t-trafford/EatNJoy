@@ -1,0 +1,25 @@
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+      <button ng-show="vm.isAdmin()" ui-sref-active="active" type="button" ng-click="vm.addItem()" class="btn btn-primary navigation">Add Food Item</button>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+
+  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="item in vm.items">
+    <div class="thumbnail">
+        <div>{{item.name}}</div>
+        <div>{{item.foodItemName}}</div>
+        <div>{{item.price}}</div>
+        <div>{{item.ingredients}}</div>
+        <div>{{item.active?'Active':'Inactive'}}</div>
+    </div>
+  </div>
+</div>
+
+
