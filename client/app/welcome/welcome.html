@@ -13,7 +13,10 @@
   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="item in vm.items">
     <div class="thumbnail">
         <div>{{item.name}}</div>
-        <div>{{item.foodItemName}}</div>
+        <div>{{item.name}}</div>
+        <div ng-if="item.foodImage">
+          <img height="191" ng-src="{{vm.appConfig.apiUrl + item.foodImage}}" alt="item image" srcset="">
+        </div>
         <div>{{item.price}}</div>
         <div>{{item.ingredients}}</div>
         <div>{{item.active?'Active':'Inactive'}}</div>

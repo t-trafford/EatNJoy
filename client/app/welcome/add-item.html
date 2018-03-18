@@ -14,13 +14,25 @@
 
     <div class="form-group">
         <label for="foodItemName">Food Image: </label>
-        <input name="foodimage" type="file" class="form-control" ng-model="vm.newItem.foodImage" required/>
+        <br>
+        <input type="text" name="foodImage" id="" required style="display:none" ng-model="vm.newItem.foodImage">
+        <div class="btn btn-primary" ngf-select="vm.uploadFiles($files, form)" ng-model="file" name="file" ngf-pattern="'image/*'"
+        ngf-accept="'image/*'" ngf-max-size="20MB" required>Select Image</div>
+
+        <a ng-if="vm.newItem.foodImage" ng-href="{{vm.newItem.foodImage}}" target="_blank">Download Image</a>
+        <!--
+          <div class="btn btn-primary" ngf-select="" ng-model="vm.files" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'"
+          ngf-max-size="20MB" ngf-multiple="false" >Select files...</div>
+          <input name="foodimage" type="file" class="form-control" ng-model="vm.newItem.foodImage" required/>
         <input name="width" value="50%" style="display: none"/>
         <input name="widgetId" value="123" style="display: none"/>
-        <br>
         <button type="submit" class="btn-btn-block btn-primary">Upload Image</button>
-        <div class="invalid-feedback" ng-show="form.$submitted && form.foodImage.$invalid">
-            <span class="error" ng-show="form.foodImage.$error.required">Image is required.</span>
+        <button type="button" class="btn btn-primary" ng-click="vm.uploadFiles()">Upload</button>
+      -->
+        <br>
+        <div class="invalid-feedback" ng-show="form.$submitted && (form.foodImage.$invalid ||  !form.file.$valid)">
+            <span class="error" ng-show="form.foodImage.$error.required || form.file.$error.required">Image is required.</span>
+            <span class="error" ng-show="!form.file.$error.required && form.file.$error">Invalid Image.</span>
           </div>
       </div>
 
