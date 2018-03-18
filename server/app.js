@@ -11,6 +11,7 @@ import config from './config/environment';
 import http from 'http';
 import seedDatabaseIfNeeded from './config/seed';
 
+
 // Connect to MongoDB
 mongoose.connect(config.mongo.uri, config.mongo.options);
 mongoose.connection.on('error', function(err) {

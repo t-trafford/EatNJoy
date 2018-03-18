@@ -11,6 +11,7 @@ import 'angular-socket-io';
 import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
 import 'angular-validation-match';
+import ngFileUpload from 'ng-file-upload';
 
 import {
   routeConfig
@@ -30,7 +31,7 @@ import socket from '../components/socket/socket.service';
 import './app.css';
 
 angular.module('eatnjoyApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
-  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
+  uiBootstrap, _Auth, account, admin, ngFileUpload, 'validation.match', navbar, footer, main, constants,
   socket, util, welcome
 ])
   .config(routeConfig)

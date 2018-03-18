@@ -1,28 +1,16 @@
 import angular from "angular";
 import uiRouter from "angular-ui-router";
 import routing from "./welcome.routes";
+import multer from "multer";
 
 export class welcomecontroller {
-  items = [];
-  newItem = {};
 
-  /*@ngInject*/
-  constructor($http, $scope, socket, $uibModal, Auth) {
-    this.$http = $http;
-    this.socket = socket;
-    this.$uibModal = $uibModal;
-    this.isLoggedIn = Auth.isLoggedInSync;
-    this.isAdmin = Auth.isAdminSync;
-    this.getCurrentUser = Auth.getCurrentUserSync;
-
-    $scope.$on("$destroy", function() {
-      socket.unsyncUpdates("item");
-    });
-  }
 
   $onInit() {
     this.getItem();
   }
+
+  
 
   getItem(){
     this.$http.get("/api/items").then(response => {
