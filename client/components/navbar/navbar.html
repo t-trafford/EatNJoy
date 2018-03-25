@@ -9,6 +9,7 @@
       </button>
   <a ng-if='!$ctrl.isLoggedIn()' ng-href="/" ng-click="ctrl.anchorClicked();" class="navbar-brand"><b>EatNJoy</b></a> 
   <a ng-if='$ctrl.isLoggedIn()' ng-href="/welcome" ng-click="ctrl.anchorClicked();" class="navbar-brand"><b>EatNJoy</b></a> 
+  
 
     </div>
     <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
@@ -16,12 +17,13 @@
         <li ng-show="$ctrl.isLoggedIn()" ng-repeat="item in $ctrl.menu" ui-sref-active="active">
             <a ui-sref="{{item.state}}" href="/welcome">{{item.title}}</a>
         </li>
-        <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="admin">Hello manager</a></li>
+        <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="admin">Manage Employee </a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="signup">Sign up <i class="fa fa-user-plus"></i></a></li>
         <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Login <i class="fa fa-user"></i></a></li>
+        <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="addcart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
         <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p> </li>
         <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
         <li ng-show="$ctrl.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
@@ -30,3 +32,4 @@
     </div>
   </div>
 </div>
+

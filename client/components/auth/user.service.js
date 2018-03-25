@@ -17,6 +17,15 @@ export function UserResource($resource) {
       params: {
         id: 'me'
       }
+    
+    },
+    getEmployee: {
+      method: 'GET',
+      params: {
+        role: 'employee'
+      },
+      isArray:true,
+      url: '/api/users/employee/of/:role'
     }
   });
 }

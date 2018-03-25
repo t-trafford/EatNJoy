@@ -30,13 +30,22 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
+export function getByRole(req, res) {
+
+  return User.find({role:req.params.role}, '-salt -password').exec()
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(handleError(res));
+}
+
 /**
  * Creates a new user
  */
 export function create(req, res) {
   var newUser = new User(req.body);
   newUser.provider = 'local';
-  newUser.role = 'user';
+  newUser.role =newUser.role || 'user';
   newUser.save()
     .then(function(user) {
       var token = jwt.sign({ _id: user._id }, config.secrets.session, {

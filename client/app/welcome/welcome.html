@@ -1,8 +1,7 @@
 
 <div class="container">
-
-  <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+   
+   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
       <button ng-show="vm.isAdmin()" ui-sref-active="active" type="button" ng-click="vm.addItem()" class="btn btn-primary navigation">Add Food Item</button>
     </div>
@@ -10,18 +9,18 @@
   <br>
   <br>
   <br>
-  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="item in vm.items">
-    <div class="thumbnail">
-        <div>{{item.name}}</div>
-        <div>{{item.name}}</div>
+  
+  <div ng-if="item.active" class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="item in vm.items">
+    <div ng-click="vm.updateItem()" class="thumbnail" >
+       
         <div ng-if="item.foodImage">
-          <img height="191" ng-src="{{vm.appConfig.apiUrl + item.foodImage}}" alt="item image" srcset="">
+          <img height="191" width="285" ng-src="{{vm.appConfig.apiUrl + item.foodImage}}" alt="item image" srcset="">
         </div>
-        <div>{{item.price}}</div>
+       <b><div class="fooditemname">{{item.name}}</div></b> 
+        <b><div class="fooditemprice">${{item.price}}</div></b>
         <div>{{item.ingredients}}</div>
-        <div>{{item.active?'Active':'Inactive'}}</div>
+        <!-- <div>{{item.active?'Active':'Inactive'}}</div> -->
     </div>
-  </div>
 </div>
 
 

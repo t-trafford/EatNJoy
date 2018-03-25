@@ -5,7 +5,7 @@ import {registerEvents} from './item.events';
 
 var ItemSchema = new mongoose.Schema({
   name: String,
-  foodItemName: String,
+//foodItemName: String,
   active: Boolean,
   foodImage: {type: String, required: true},
   price: Number,

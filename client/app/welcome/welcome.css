@@ -69,4 +69,27 @@ h3{
     position: absolute; /*or fixed*/
     right: 20px;
 }
+.fooditemname
+{
+  font-size: 25px
+}
+.fooditemprice
+{
+  font-size: 22px
+}
 
+
+
+#sidebar{
+position: fixed;
+width: 200px;
+height: 100%;
+background: #151719
+}
+
+#sidebar ul li {
+color: rgba(241, 227, 227, 0.9);
+list-style: none;
+padding: 15px 10px;
+border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+}

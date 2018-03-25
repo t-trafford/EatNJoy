@@ -7,4 +7,5 @@ import AdminController from './admin.controller';
 export default angular.module('eatnjoyApp.admin', ['eatnjoyApp.auth', 'ui.router'])
   .config(routes)
   .controller('AdminController', AdminController)
+  
   .name;

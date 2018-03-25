@@ -30,13 +30,19 @@ import socket from '../components/socket/socket.service';
 
 import './app.css';
 
+
+
 angular.module('eatnjoyApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, ngFileUpload, 'validation.match', navbar, footer, main, constants,
   socket, util, welcome
 ])
+
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
     'ngInject';
+
+    
+    
     // Redirect to login if route requires auth and you're not logged in
 
     $rootScope.$on('$stateChangeStart', function(event, next) {

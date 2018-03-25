@@ -17,15 +17,17 @@ export class welcomecontroller {
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
 
+
     $scope.$on("$destroy", function() {
       socket.unsyncUpdates("item");
     });
   }
 
+ 
+
   $onInit() {
     this.getItem();
   }
-
 
 
   uploadFiles(file, form) {
@@ -93,6 +95,27 @@ export class welcomecontroller {
     );
   }
 
+  updateItem(item) {
+    this.newItem = item;
+    this.file = '';
+    var vm = this;
+    var modalInstance = this.$uibModal.open({
+      template: require("./add-item.html"),
+      windowClass: "modal-default",
+      // controller: welcomecontroller,
+      // controllerAs: "vm",
+
+    });
+
+    modalInstance.result.then(
+      function(from) {
+        console.log(from);
+        this.getItem();
+        vm.newItem = {};
+      }, 
+    );
+  }
+
   saveItem(form, $close) {
     if (form.$invalid) {
       return;
@@ -100,6 +123,7 @@ export class welcomecontroller {
     if (this.newItem) {
       this.$http.post("/api/items", this.newItem).then(function(res) {
         $close(res.data);
+        this.getItem();
       });
     }
   }

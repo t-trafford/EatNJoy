@@ -4,6 +4,7 @@ var express = require('express');
 var controller = require('./item.controller');
 var multer = require('multer');
 var path = require('path');
+var mime = require('mime');
 
 var router = express.Router();
 
