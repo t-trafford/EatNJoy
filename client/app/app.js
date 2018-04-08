@@ -21,20 +21,22 @@ import _Auth from '../components/auth/auth.module';
 import account from './account';
 import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
+// import sidebar from '../components/sidebar/sidebar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import welcome from './welcome/welcome.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
-
+import contactus from './contactus/contactus.component';
+import manageaddress from './manageaddress/manageaddress.component';
 import './app.css';
 
 
 
 angular.module('eatnjoyApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, ngFileUpload, 'validation.match', navbar, footer, main, constants,
-  socket, util, welcome
+  socket, util, welcome, contactus, manageaddress
 ])
 
   .config(routeConfig)

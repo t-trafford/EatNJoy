@@ -13,9 +13,9 @@
     </div>
 
     <div class="form-group">
-        <label for="foodItemName">Food Image: </label>
+        <label for="foodImage">Food Image: </label>
         <br>
-        <input type="text" name="foodImage" id="" required style="display:none" ng-model="vm.newItem.foodImage">
+        <input type="text" name="itemfoodImage" id="" required style="display:none" ng-model="vm.newItem.foodImage">
         <div class="btn btn-primary" ngf-select="vm.uploadFiles($files, form)" ng-model="file" name="file" ngf-pattern="'image/*'"
         ngf-accept="'image/*'" ngf-max-size="20MB" required>Select Image</div>
 

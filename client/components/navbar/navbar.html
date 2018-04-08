@@ -18,12 +18,17 @@
             <a ui-sref="{{item.state}}" href="/welcome">{{item.title}}</a>
         </li>
         <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="admin">Manage Employee </a></li>
+        <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="manageaddress">Manage Address </a></li>
+        <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="">Reserve a Table </a></li>
+        <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn() || $ctrl.isCustomer() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="">Reserve a Table </a></li>
+        <li ng-show="!$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="contactus"> Contact Us </a></li>
+
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="signup">Sign up <i class="fa fa-user-plus"></i></a></li>
         <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Login <i class="fa fa-user"></i></a></li>
-        <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="addcart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+        <li ng-show="!$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="addcart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
         <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p> </li>
         <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
         <li ng-show="$ctrl.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
@@ -32,4 +37,24 @@
     </div>
   </div>
 </div>
+<br>
+<!-- <div class="sidebar sidebar-default sidebar-static-left">
+      
+      
+    <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+        
+  
+        <ul class="nav sidebar-nav navbar-left">
+          <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="signup">Sign up <i class="fa fa-user-plus"></i></a></li>
+          <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Login <i class="fa fa-user"></i></a></li>
+          <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="addcart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+          <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p> </li>
+          <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+          <li ng-show="$ctrl.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
+  
+        </ul>
+      </div>
+</div> -->
+  
+
 

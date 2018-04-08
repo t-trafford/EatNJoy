@@ -1,17 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/items              ->  index
- * POST    /api/items              ->  create
- * GET     /api/items/:id          ->  show
- * PUT     /api/items/:id          ->  upsert
- * PATCH   /api/items/:id          ->  patch
- * DELETE  /api/items/:id          ->  destroy
+ * GET     /api/addresss              ->  index
+ * POST    /api/addresss              ->  create
+ * GET     /api/addresss/:id          ->  show
+ * PUT     /api/addresss/:id          ->  upsert
+ * PATCH   /api/addresss/:id          ->  patch
+ * DELETE  /api/addresss/:id          ->  destroy
  */
 
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import Item from './item.model';
+import Address from './address.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -64,54 +64,54 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Items
+// Gets a list of Addresss
 export function index(req, res) {
-  return Item.find().exec()
+  return Address.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Gets a single Item from the DB
+// Gets a single Address from the DB
 export function show(req, res) {
-  return Item.findById(req.params.id).exec()
+  return Address.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Creates a new Item in the DB
+// Creates a new Address in the DB
 export function create(req, res) {
-  return Item.create(req.body)
+  return Address.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
-// Upserts the given Item in the DB at the specified ID
+// Upserts the given Address in the DB at the specified ID
 export function upsert(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return Item.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
+  return Address.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
 
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Updates an existing Item in the DB
+// Updates an existing Address in the DB
 export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return Item.findById(req.params.id).exec()
+  return Address.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
-    .then(patchUpdates(req.body.item))
+    .then(patchUpdates(req.body))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Deletes a Item from the DB
+// Deletes a Address from the DB
 export function destroy(req, res) {
-  return Item.findById(req.params.id).exec()
+  return Address.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

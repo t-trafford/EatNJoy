@@ -87,6 +87,8 @@ export class welcomecontroller {
         console.log(from);
         this.getItem();
         vm.newItem = {};
+        this.getItem();
+
       },
 
       function() {
@@ -112,6 +114,8 @@ export class welcomecontroller {
         console.log(from);
         this.getItem();
         vm.newItem = {};
+        this.getItem();
+
       }, 
     );
   }

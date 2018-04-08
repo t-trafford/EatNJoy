@@ -1,0 +1,20 @@
+<form name="form" enctype="multipart/form-data" ng-submit="vm.saveAddress(form,$close)" novalidate>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Add/Edit Address</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+
+    <div class="form-group">
+      <label for="nameI">Name: </label>
+      <input type="text" class="form-control is-invalid" required name="nameI" ng-model="vm.newAddress.name">
+      <div class="invalid-feedback" ng-show="form.$submitted && form.nameI.$invalid">
+        <span class="error" ng-show="form.nameI.$error.required">Name is required.</span>
+      </div>
+    </div>
+
+</div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="submit">Save</button>
+    <button class="btn btn-warning" type="button" ng-click="$dismiss()">Cancel</button>
+  </div>
+</form>
