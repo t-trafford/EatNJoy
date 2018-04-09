@@ -24,14 +24,19 @@ export default class AdminController {
   }
 
 
-  addEmployee() {
-    this.user = {};
+  addEmployee(user) {
+    this.user =user|| {};
     var vm = this;
     var modalInstance = this.$uibModal.open({
       template: require("./addEmployee.html"),
       windowClass: "modal-default",
-      controller: AdminController,
-      controllerAs: "vm"
+      controller: 'AddEditController',
+      controllerAs: "vm",
+      resolve:{
+        user: function(){
+          return (vm.user||{});
+        }
+      }
     });
 
     modalInstance.result.then(
@@ -45,21 +50,6 @@ export default class AdminController {
         console.log("modal-component dismissed at: " + new Date());
       }
     );
-  }
-
-  saveEmployee(form, $close) {
-    if (form.$invalid) {
-      return;
-    }
-    if (this.user) {
-      this.user.role = "employee"
-    //  this.Auth.createUser(this.user).then(function(res) {
-      this.$http.post("/api/users", this.user).then(function(res) {
-        $close(res.data);
-        this.getEmployee();
-        // $close(res.data);
-      });
-    }
   }
 
   delete(user) {

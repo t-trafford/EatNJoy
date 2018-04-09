@@ -11,7 +11,7 @@
   <br>
   
   <div ng-if="item.active" class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="item in vm.items">
-    <div ng-click="vm.updateItem()" class="thumbnail" >
+    <div ng-click="vm.addItem(item)" class="thumbnail" >
        
         <div ng-if="item.foodImage">
           <img height="191" width="378" ng-src="{{vm.appConfig.apiUrl + item.foodImage}}" alt="item image" srcset="">
@@ -19,6 +19,9 @@
        <b><div class="fooditemname">{{item.name}}</div></b> 
         <b><div class="fooditemprice">${{item.price}}</div></b>
         <div>{{item.ingredients}}</div>
+        <a ng-show="$ctrl.isCustomer() && $ctrl.isLoggedIn()" href="#" class="btn btn-info btn-md">
+          <span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart
+        </a>
         <!-- <div>{{item.active?'Active':'Inactive'}}</div> -->
     </div>
 </div>

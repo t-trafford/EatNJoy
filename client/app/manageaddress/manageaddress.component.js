@@ -4,12 +4,12 @@ import routing from "./manageaddress.routes";
 
 
 'use strict';
-const angular = require('angular');
+// const angular = require('angular');
 
 export class manageaddressComponent {
   newAddress = {};
   /*@ngInject*/
-  constructor($http, $scope, socket, $uibModal, Auth, appConfig) {
+  constructor($http, $scope, socket, $uibModal, Auth, appConfig, Upload) {
     // Use the User $resource to fetch all users
     this.$http = $http;
     this.socket = socket;
@@ -23,66 +23,115 @@ export class manageaddressComponent {
 
 
     $scope.$on("$destroy", function() {
-      socket.unsyncUpdates("item");
-    });
-}
-
-$onInit() {
-  this.getAddress();
-}
-
-getAddress() {
-  this.$http.get("/api/address").then(response => {
-    this.addresses = response.data;
-    this.socket.syncUpdates("address", this.addresses);
-  });
-}
-
-
-addAddress() {
-  this.newAddress = {};
-  var vm = this;
-  var modalInstance = this.$uibModal.open({
-    template: require("./add-address.html"),
-    windowClass: "modal-default",
-    controller: manageaddressComponent,
-    controllerAs: "vm"
-  });
-
-  modalInstance.result.then(
-    function(from) {
-      console.log(from);
-      this.getAddress();
-      vm.newAddress = {};
-      this.getAddress();
-
-    },
-
-    function() {
-      console.log("modal-component dismissed at: " + new Date());
-    }
-  );
-}
-
-saveAddress(form, $close) {
-  if (form.$invalid) {
-    return;
-  }
-  if (this.newAddress) {
-    this.$http.post("/api/address", this.newAddress).then(function(res) {
-      $close(res.data);
-      this.getAddress();
+      socket.unsyncUpdates("address");
     });
   }
-}
+
+  $onInit() {
+    this.getAddress();
+  }
+
+  getAddress() {
+    this.$http.get("/api/address").then(response => {
+      this.addresss = response.data;
+      this.socket.syncUpdates("address", this.addresss);
+    });
+  }
+
+  addAddress(address) {
+    this.newAddress = angular.copy(address||{});
+    var vm = this;
+    var modalInstance = this.$uibModal.open({
+      template: require("./add-address.html"),
+      windowClass: "modal-default",
+      controller: 'addAddressController',
+      controllerAs: "vm",
+      resolve:{
+        address: function () {
+          return vm.newAddress;
+        }
+      }
+    });
+
+    modalInstance.result.then(
+      function(from) {
+        console.log(from);
+        vm.getAddress();
+        vm.newAddress = {};
+        vm.getAddress();
+
+      },
+
+      function() {
+        console.log("modal-component dismissed at: " + new Date());
+      }
+    );
+  }
 
 }
 
-export default angular.module('eatnjoyApp.manageaddress', [uiRouter])
+export default angular
+  .module("eatnjoyApp.manageaddress", [uiRouter])
   .config(routing)
+  .controller('addAddressController',['$http', '$scope', 'socket', '$uibModal', 'Auth', 'appConfig','address', 
+  function ($http, $scope, socket, $uibModal, Auth, Upload, appConfig,address) {
+    var vm =this;
+    vm.$http = $http;
+    vm.newAddress = address||{};
+    vm.socket = socket;
+    vm.appConfig = appConfig;
+    vm.$uibModal = $uibModal;
+    vm.isLoggedIn = Auth.isLoggedInSync;
+    vm.isAdmin = Auth.isAdminSync;
+    vm.getCurrentUser = Auth.getCurrentUserSync;
+
+    vm.saveAddress = function(form, $close) {
+      if (form.$invalid) {
+        return;
+      }
+      if (vm.newAddress._id) {
+        delete vm.newAddress.__v;
+        vm.$http.put("/api/addresss/"+vm.newAddress._id, vm.newAddress).then(function(res) {
+          $close(res.data);
+        });
+      }else{
+        vm.$http.post("/api/addresss", vm.newAddress).then(function(res) {
+          $close(res.data);
+        });
+      }
+    }
+
+  }])
   .component('manageaddress', {
     template: require("./manageaddress.html"),
     controller: manageaddressComponent,
     controllerAs: "vm"
   })
   .name;
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -20,7 +20,9 @@ export class NavbarComponent {
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.isEmployee = Auth.isEmployeeSync;
-    this.isCustomer = Auth.isCustomerSync
+    this.isCustomer = Auth.isCustomerSync;
+    this.isDriver = Auth.isDriverSync
+
   }
 
 }

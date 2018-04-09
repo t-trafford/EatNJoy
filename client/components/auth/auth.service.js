@@ -207,6 +207,9 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
     isCustomer(...args) {
       return Auth.hasRole(Reflect.apply([].concat, ['user'], args));
     },
+    isDriver(...args) {
+      return Auth.hasRole(Reflect.apply([].concat, ['driver'], args));
+    },
     /**
      * Check if a user is an admin
      *
@@ -223,6 +226,10 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
     isCustomerSync() {
       // eslint-disable-next-line no-sync
       return Auth.hasRoleSync('user');
+    },
+    isDriverSync() {
+      // eslint-disable-next-line no-sync
+      return Auth.hasRoleSync('driver');
     },
     /**
      * Get auth token

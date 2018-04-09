@@ -11,7 +11,47 @@ function validationError(res, statusCode) {
   };
 }
 
+
+function respondWithResult(res, statusCode) {
+  statusCode = statusCode || 200;
+  return function(entity) {
+    if(entity) {
+      return res.status(statusCode).json(entity);
+    }
+    return null;
+  };
+}
+
+function patchUpdates(patches) {
+  return function(entity) {
+    try {
+      console.log(entity)
+      console.log('entity')
+      console.log(patches)
+      // eslint-disable-next-line prefer-reflect
+      jsonpatch.apply(entity, patches, /*validate*/ true);
+    } catch(err) {
+      return Promise.reject(err);
+    }
+
+    return entity.save();
+  };
+}
+
+
+function handleEntityNotFound(res) {
+  return function(entity) {
+    if(!entity) {
+      res.status(404).end();
+      return null;
+    }
+    return entity;
+  };
+}
+
 function handleError(res, statusCode) {
+  console.log(res)
+  console.log(statusCode)
   statusCode = statusCode || 500;
   return function(err) {
     return res.status(statusCode).send(err);
@@ -105,6 +145,28 @@ export function changePassword(req, res) {
         return res.status(403).end();
       }
     });
+}
+
+
+// Updates an existing Item in the DB
+export function patch(req, res) {
+  if(req.body._id) {
+    Reflect.deleteProperty(req.body, '_id');
+  }
+  return User.findById(req.params.id).exec()
+    .then(function(entity) {
+      if(!entity) {
+        res.status(404).end();
+        return null;
+      }
+      return entity;
+    })
+    .then(function (entity) {
+      User.findOneAndUpdate({'_id':req.params.id},{'$set':req.body}).exec()
+      .then(respondWithResult(res))
+      .catch(handleError(res));
+    })
+    .catch(handleError(res));
 }
 
 /**

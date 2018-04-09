@@ -40,11 +40,22 @@
   padding: 0.2em 0;
 }
 
+body {
+  background: url('/assets/images/bgimg.jpg');
+  background-size: cover;
+  background-position: center; 
+  background-attachment: fixed;
+}
+
 
 /* Component styles are injected through gulp */
 /* inject:css */
 @import 'admin/admin.css';
+@import 'contactus/contactus.css';
 @import 'main/main.css';
+@import 'manageaddress/manageaddress.css';
+@import 'reserveatable/reserveatable.css';
+@import 'managecard/managecard.css';
 @import 'welcome/welcome.css';
 @import '../components/footer/footer.css';
 @import '../components/modal/modal.css';

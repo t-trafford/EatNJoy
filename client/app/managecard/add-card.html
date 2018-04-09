@@ -1,0 +1,47 @@
+<form name="form" enctype="multipart/form-data" ng-submit="vm.saveCard(form,$close)" novalidate>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Add/Edit Card</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+
+    <div class="form-group">
+      <label for="nameI">Name: </label>
+      <input type="text" class="form-control is-invalid" required name="nameI" ng-model="vm.newCard.name">
+      <div class="invalid-feedback" ng-show="form.$submitted && form.nameI.$invalid">
+        <span class="error" ng-show="form.nameI.$error.required">Name is required.</span>
+      </div>
+    </div>
+
+      <div class="form-group">
+        <label for="cardnumber">Card Number: </label>
+
+        <input type="number" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" name="cardnumber" class="form-control" ng-model="vm.newCard.cardnumber" required
+            mongoose-error/>
+        <div class="invalid-feedback" ng-show="form.$submitted && form.phone.$invalid">
+            <span class="error" ng-show="form.phone.$error.required">Valid Card Number is required.</span>
+            <span class="error" ng-show="form.phone.$error.pattern">Invalid Card Number.</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="expdate">Expiry Date: </label>
+      <input type="date" class="form-control is-invalid" required name="expdate" ng-model="vm.newCard.expdate">
+      <div class="invalid-feedback" ng-show="form.$submitted && form.expdate.$invalid">
+        <span class="error" ng-show="form.address1.$error.required">Expiry Date is required.</span>
+      </div>
+    </div>
+
+     <div class="form-group">
+      <label for="cvv">CVV Number: </label>
+      <input type="number" class="form-control is-invalid" required name="cvv" ng-model="vm.newCard.cvv">
+      <div class="invalid-feedback" ng-show="form.$submitted && form.cvv.$invalid">
+        <span class="error" ng-show="form.address1.$error.required">CVV Number is required.</span>
+      </div>
+    </div>
+
+</div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="submit">Save</button>
+    <button class="btn btn-warning" type="button" ng-click="$dismiss()">Cancel</button>
+  </div>
+</form>
