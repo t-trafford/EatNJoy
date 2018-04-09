@@ -12,6 +12,7 @@ var AddressSchema = new mongoose.Schema({
   country: String,
   type: String,
   phone: Number,
+  user:{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 });
 
 registerEvents(AddressSchema);

@@ -12,6 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import Address from './address.model';
+import mongoose from 'mongoose';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -66,7 +67,14 @@ function handleError(res, statusCode) {
 
 // Gets a list of Addresss
 export function index(req, res) {
-  return Address.find().exec()
+  var query = {};
+  if (typeof req.user['_id'] == 'string') {
+    query['user']=mongoose.Types.ObjectId(req.user['_id']);
+  }else if (typeof req.user['_id'] == 'object') {
+    query['user']=req.user['_id'];
+  }
+  return Address.find(query)
+  .populate('user', 'email name phone').exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -81,6 +89,7 @@ export function show(req, res) {
 
 // Creates a new Address in the DB
 export function create(req, res) {
+  req.body.user = req.user;
   return Address.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));

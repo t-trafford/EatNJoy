@@ -10,11 +10,16 @@
   <br>
   <br>
   
-  <div ng-if="item.active" class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="ad in vm.addresss">
-    <div ng-click="vm.addAddress(address)" class="thumbnail" >
+  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="ad in vm.addresss">
+    <div ng-click="vm.addAddress(ad)" class="thumbnail" >
        
        <div class="fooditemname">{{ad.name}}</div>
         <div class="fooditemprice">{{ad.address1}}</div>
+        <div class="fooditemprice">{{ad.address2}}</div>
+        <div class="fooditemprice">{{ad.city}}</div>
+        <div class="fooditemprice">{{ad.state}}</div>
+        <div class="fooditemprice">{{ad.country}}</div>
+        <div class="fooditemprice">{{ad.type}}</div>
         
     </div>
 </div>

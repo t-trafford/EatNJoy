@@ -12,6 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import Reservetable from './reservetable.model';
+import mongoose from 'mongoose';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -66,6 +67,12 @@ function handleError(res, statusCode) {
 
 // Gets a list of Reservetables
 export function index(req, res) {
+  var query = {};
+  if (typeof req.user['_id'] == 'string') {
+    query['user']=mongoose.Types.ObjectId(req.user['_id']);
+  }else if (typeof req.user['_id'] == 'object') {
+    query['user']=req.user['_id'];
+  }
   return Reservetable.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -81,6 +88,7 @@ export function show(req, res) {
 
 // Creates a new Reservetable in the DB
 export function create(req, res) {
+  req.body.user = req.user;
   return Reservetable.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));

@@ -74,7 +74,7 @@ export default angular
   .module("eatnjoyApp.manageaddress", [uiRouter])
   .config(routing)
   .controller('addAddressController',['$http', '$scope', 'socket', '$uibModal', 'Auth', 'appConfig','address', 
-  function ($http, $scope, socket, $uibModal, Auth, Upload, appConfig,address) {
+  function ($http, $scope, socket, $uibModal, Auth, appConfig,address) {
     var vm =this;
     vm.$http = $http;
     vm.newAddress = address||{};
@@ -91,11 +91,11 @@ export default angular
       }
       if (vm.newAddress._id) {
         delete vm.newAddress.__v;
-        vm.$http.put("/api/addresss/"+vm.newAddress._id, vm.newAddress).then(function(res) {
+        vm.$http.put("/api/address/"+vm.newAddress._id, vm.newAddress).then(function(res) {
           $close(res.data);
         });
       }else{
-        vm.$http.post("/api/addresss", vm.newAddress).then(function(res) {
+        vm.$http.post("/api/address", vm.newAddress).then(function(res) {
           $close(res.data);
         });
       }

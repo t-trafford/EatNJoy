@@ -54,8 +54,8 @@ body {
 @import 'contactus/contactus.css';
 @import 'main/main.css';
 @import 'manageaddress/manageaddress.css';
-@import 'reserveatable/reserveatable.css';
 @import 'managecard/managecard.css';
+@import 'reserveatable/reserveatable.css';
 @import 'welcome/welcome.css';
 @import '../components/footer/footer.css';
 @import '../components/modal/modal.css';
