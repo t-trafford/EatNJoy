@@ -64,6 +64,7 @@ function handleError(res, statusCode) {
  */
 export function index(req, res) {
   return User.find({}, '-salt -password').exec()
+  
     .then(users => {
       res.status(200).json(users);
     })
@@ -73,7 +74,8 @@ export function index(req, res) {
 export function getByRole(req, res) {
 var query = {};
 if (req.params && req.params.role && req.params.role!='all') {
-  query['role']=req.params.role;
+  // query['role']=req.params.role;
+  query['role']={'$in':req.params.role.split(',')}
 }
   return User.find(query, '-salt -password').exec()
     .then(users => {

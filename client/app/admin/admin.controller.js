@@ -25,7 +25,7 @@ export default class AdminController {
   getEmployee(){
     // this.users = this.User.getEmployee();
 
-    this.$http.get("/api/users/employee/of/all").then(response => {
+    this.$http.get("/api/users/employee/of/employee,driver").then(response => {
       this.users = (response.data||[]);
       this.socket.syncUpdates("users", this.users);
     });
@@ -61,7 +61,15 @@ export default class AdminController {
   }
 
   delete(user) {
-    user.$remove();
-    this.users.splice(this.users.indexOf(user), 1);
+    
+      // this.users = this.User.getEmployee();
+  
+      this.$http.delete("/api/users/" + user._id).then(response => {
+        
+        this.users.splice(this.users.indexOf(user), 1);
+    
+      });
+    // user.$remove();
+ 
   }
 }

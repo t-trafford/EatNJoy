@@ -14,7 +14,7 @@
   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="card in vm.cards">
     <div class="thumbnail" >
       <input type="radio" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a ng-click="vm.addCard(card)"  class="edit"> <span class="fa fa-edit fa-2x"></span></a>
-      &nbsp;&nbsp; <a ng-click="" class="trash"> <span class="fa fa-trash fa-2x"></span></a>
+      &nbsp;&nbsp; <a ng-click="vm.delete(card)" class="trash"> <span class="fa fa-trash fa-2x"></span></a>
 
       <div>{{card.name}}</div>
         <div>{{card.cardnumber}}</div>

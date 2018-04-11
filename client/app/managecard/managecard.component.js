@@ -40,6 +40,19 @@ export class managecardComponent {
     });
   }
 
+  delete(card) {
+    
+    // this.users = this.User.getEmployee();
+
+    this.$http.delete("/api/cards/" + card._id).then(response => {
+      
+      this.cards.splice(this.cards.indexOf(card), 1);
+  
+    });
+  // user.$remove();
+
+}
+
   addCard(card) {
     this.newCard = angular.copy(card||{});
     var vm = this;
@@ -86,17 +99,20 @@ export default angular.module('eatnjoyApp.managecard', [uiRouter])
     vm.isAdmin = Auth.isAdminSync;
     vm.getCurrentUser = Auth.getCurrentUserSync;
 
+
+    
+
     vm.saveCard = function(form, $close) {
       if (form.$invalid) {
         return;
       }
       if (vm.newCard._id) {
         delete vm.newCard.__v;
-        vm.$http.put("/api/card/"+vm.newCard._id, vm.newCard).then(function(res) {
+        vm.$http.put("/api/cards/"+vm.newCard._id, vm.newCard).then(function(res) {
           $close(res.data);
         });
       }else{
-        vm.$http.post("/api/card", vm.newCard).then(function(res) {
+        vm.$http.post("/api/cards", vm.newCard).then(function(res) {
           $close(res.data);
         });
       }
