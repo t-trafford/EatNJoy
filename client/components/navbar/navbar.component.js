@@ -16,6 +16,7 @@ export class NavbarComponent {
   constructor(Auth) {
     'ngInject';
 
+    this.Auth = Auth;
     this.isLoggedIn = Auth.isLoggedInSync;
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
@@ -24,6 +25,16 @@ export class NavbarComponent {
     this.isDriver = Auth.isDriverSync
 
   }
+
+  $onInit() {
+    var vm = this;
+
+    vm.Auth.isLoggedIn((success) => {
+      
+    });
+    
+  }
+
 
 }
 

@@ -1,17 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/cards              ->  index
- * POST    /api/cards              ->  create
- * GET     /api/cards/:id          ->  show
- * PUT     /api/cards/:id          ->  upsert
- * PATCH   /api/cards/:id          ->  patch
- * DELETE  /api/cards/:id          ->  destroy
+ * GET     /api/carts              ->  index
+ * POST    /api/carts              ->  create
+ * GET     /api/carts/:id          ->  show
+ * PUT     /api/carts/:id          ->  upsert
+ * PATCH   /api/carts/:id          ->  patch
+ * DELETE  /api/carts/:id          ->  destroy
  */
 
 'use strict';
 
-import jsonpatch from 'fast-json-patch';
-import Card from './card.model';
+import { applyPatch } from 'fast-json-patch';
+import Cart from './cart.model';
 import mongoose from 'mongoose';
 
 function respondWithResult(res, statusCode) {
@@ -27,8 +27,7 @@ function respondWithResult(res, statusCode) {
 function patchUpdates(patches) {
   return function(entity) {
     try {
-      // eslint-disable-next-line prefer-reflect
-      jsonpatch.apply(entity, patches, /*validate*/ true);
+      applyPatch(entity, patches, /*validate*/ true);
     } catch(err) {
       return Promise.reject(err);
     }
@@ -41,9 +40,7 @@ function removeEntity(res) {
   return function(entity) {
     if(entity) {
       return entity.remove()
-        .then(() => {
-          res.status(204).end();
-        });
+        .then(() => res.status(204).end());
     }
   };
 }
@@ -65,7 +62,7 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Cards
+// Gets a list of Carts
 export function index(req, res) {
   var query = {};
 if (typeof req.user['_id'] == 'string') {
@@ -73,54 +70,72 @@ if (typeof req.user['_id'] == 'string') {
 }else if (typeof req.user['_id'] == 'object') {
   query['user']=req.user['_id'];
 }
-  return Card.find(query)
+  return Cart.find(query)
   .populate('user', 'email name phone').exec()
+  
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Gets a single Card from the DB
+// Gets a single Cart from the DB
 export function show(req, res) {
-  return Card.findById(req.params.id).exec()
+  return Cart.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Creates a new Card in the DB
+// Creates a new Cart in the DB
 export function create(req, res) {
+  
   req.body.user = req.user;
-  return Card.create(req.body)
-    .then(respondWithResult(res, 201))
-    .catch(handleError(res));
+  return Cart.findOneAndUpdate({
+    item: req.body.item,
+    user: req.body.user
+  }, {
+    $set: req.body,
+    $inc: {
+      "quantity": 1
+    }
+  }, {
+    upsert: true,
+    returnNewDocument: true
+  }).exec().then((result) => {
+
+    return res.status(200).json(result);
+  }).catch(handleError(res));
+
+  // return Cart.create(req.body)
+  //   .then(respondWithResult(res, 201))
+  //   .catch(handleError(res));
 }
 
-// Upserts the given Card in the DB at the specified ID
+// Upserts the given Cart in the DB at the specified ID
 export function upsert(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return Card.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
+  return Cart.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
 
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Updates an existing Card in the DB
+// Updates an existing Cart in the DB
 export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return Card.findById(req.params.id).exec()
+  return Cart.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(patchUpdates(req.body))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Deletes a Card from the DB
+// Deletes a Cart from the DB
 export function destroy(req, res) {
-  return Card.findById(req.params.id).exec()
+  return Cart.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

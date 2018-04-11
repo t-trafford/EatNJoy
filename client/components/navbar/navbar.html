@@ -18,12 +18,12 @@
             <a ui-sref="{{item.state}}" href="/welcome">{{item.title}}</a>
         </li>
         <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="admin">Manage Employees </a></li>
-        <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="manageaddress">Manage Address </a></li>
+        <li ng-show="$ctrl.isCustomer() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="manageaddress">Manage Address </a></li>
         <!-- <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="">Reserve a Table </a></li> -->
-        <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn() || $ctrl.isCustomer() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="reserveatable">Reserve a Table </a></li>
-       <li ng-show="$ctrl.isCustomer() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="managecard">Manage Cards </a></li>
+        <li ng-show="$ctrl.isCustomer() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="managecard">Manage Cards </a></li>
         <li ng-show="$ctrl.isCustomer() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="contactus"> Contact Us </a></li>
-
+        <li ng-show="($ctrl.isAdmin() && $ctrl.isLoggedIn()) || ($ctrl.isCustomer() && $ctrl.isLoggedIn())" ui-sref-active="active"><a ui-sref="reserveatable">Reserve a Table </a></li>
+    
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

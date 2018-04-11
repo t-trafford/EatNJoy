@@ -32,7 +32,10 @@ export class managecardComponent {
 
   getCard() {
     this.$http.get("/api/cards").then(response => {
-      this.cards = response.data;
+      this.cards = (response.data||[]).map(itm=>{
+        itm.expdate = new Date(itm.expdate); 
+        return itm;
+      });
       this.socket.syncUpdates("card", this.cards);
     });
   }
@@ -58,7 +61,6 @@ export class managecardComponent {
         vm.getCard();
         vm.newCard = {};
         vm.getCard();
-
       },
 
       function() {
@@ -70,11 +72,10 @@ export class managecardComponent {
 }
 
 
-
 export default angular.module('eatnjoyApp.managecard', [uiRouter])
   .config(routing)
   .controller('addCardController',['$http', '$scope', 'socket', '$uibModal', 'Auth', 'appConfig','card', 
-  function ($http, $scope, socket, $uibModal, Auth, Upload, appConfig,card) {
+  function ($http, $scope, socket, $uibModal, Auth, appConfig,card) {
     var vm =this;
     vm.$http = $http;
     vm.newCard = card||{};
@@ -91,11 +92,11 @@ export default angular.module('eatnjoyApp.managecard', [uiRouter])
       }
       if (vm.newCard._id) {
         delete vm.newCard.__v;
-        vm.$http.put("/api/cards/"+vm.newCard._id, vm.newCard).then(function(res) {
+        vm.$http.put("/api/card/"+vm.newCard._id, vm.newCard).then(function(res) {
           $close(res.data);
         });
       }else{
-        vm.$http.post("/api/cards", vm.newCard).then(function(res) {
+        vm.$http.post("/api/card", vm.newCard).then(function(res) {
           $close(res.data);
         });
       }

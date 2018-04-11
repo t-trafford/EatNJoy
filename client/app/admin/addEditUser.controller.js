@@ -32,7 +32,7 @@ export default class AddEditController {
           // $close(res.data);
         });
       }else{
-        this.user.role = "employee";
+        this.user.role = this.user.role||"employee";
       this.$http.post("/api/users", this.user).then(function(res) {
         $close(res.data);
       });

@@ -9,6 +9,7 @@ export class welcomecontroller {
     // Use the User $resource to fetch all users
     this.$http = $http;
     this.socket = socket;
+    this.Auth = Auth;
     this.newItem = {};
     this.appConfig = appConfig;
     this.$uibModal = $uibModal;
@@ -27,6 +28,15 @@ export class welcomecontroller {
 
   $onInit() {
     this.getItem();
+  }
+  
+  addToCart(item) {
+      if (this.Auth.isLoggedInSync()) {
+        this.$http.post("/api/carts", {
+          item: item._id
+        }).then(function(res) {
+        });
+      }
   }
 
   getItem() {

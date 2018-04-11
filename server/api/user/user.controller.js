@@ -71,8 +71,11 @@ export function index(req, res) {
 }
 
 export function getByRole(req, res) {
-
-  return User.find({role:req.params.role}, '-salt -password').exec()
+var query = {};
+if (req.params && req.params.role && req.params.role!='all') {
+  query['role']=req.params.role;
+}
+  return User.find(query, '-salt -password').exec()
     .then(users => {
       res.status(200).json(users);
     })

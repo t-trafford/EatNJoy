@@ -73,7 +73,9 @@ export function index(req, res) {
   }else if (typeof req.user['_id'] == 'object') {
     query['user']=req.user['_id'];
   }
-  return Reservetable.find().exec()
+  return Reservetable.find(query)
+  .populate('user', 'email name phone').exec()
+  
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

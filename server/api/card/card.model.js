@@ -8,6 +8,7 @@ var CardSchema = new mongoose.Schema({
   cardnumber: Number,
   expdate: Date,
   cvv: Number,
+  user:{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 });
 
 registerEvents(CardSchema);

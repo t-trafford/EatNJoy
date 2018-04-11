@@ -15,12 +15,20 @@ export default class AdminController {
 
     // Use the User $resource to fetch all users
     this.User = User;
+    $scope.$on("$destroy", function() {
+      socket.unsyncUpdates("users");
+    });
     this.getEmployee();
   }
   user = {};
 
   getEmployee(){
-    this.users = this.User.getEmployee();
+    // this.users = this.User.getEmployee();
+
+    this.$http.get("/api/users/employee/of/all").then(response => {
+      this.users = (response.data||[]);
+      this.socket.syncUpdates("users", this.users);
+    });
   }
 
 
