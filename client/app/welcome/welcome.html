@@ -19,7 +19,7 @@
        <b  ng-click="vm.addItem(item)"><div class="fooditemname">{{item.name}}</div></b> 
         <b><div class="fooditemprice">${{item.price}}</div></b>
         <div>{{item.ingredients}}</div>
-        <a href="" ng-click="vm.addToCart(item)" class="btn btn-info btn-md">
+        <a href="" ng-show="!vm.isAdmin()"  ng-click="vm.addToCart(item)" class="btn btn-info btn-md">
           <span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart
         </a>
         <!-- <div>{{item.active?'Active':'Inactive'}}</div> -->

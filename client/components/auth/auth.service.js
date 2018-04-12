@@ -25,6 +25,11 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
   var hasRole = function(userRole, role) {
     return userRoles.indexOf(userRole) >= userRoles.indexOf(role);
   };
+  var validateRole = function(userRole, role) {
+    return userRoles.indexOf(userRole)>=0 && userRole.indexOf(role)>=0;
+  };
+
+
 
   if($cookies.get('token') && $location.path() !== '/logout') {
     currentUser = User.get();
@@ -181,6 +186,16 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
         });
     },
 
+    validateRole(role, callback) {
+      return Auth.getCurrentUser(undefined)
+        .then(user => {
+          let has = validateRole(_.get(user, 'role'), role);
+
+          safeCb(callback)(has);
+          return has;
+        });
+    },
+
     /**
      * Check if a user has a specified role or higher
      *
@@ -189,6 +204,9 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
      */
     hasRoleSync(role) {
       return hasRole(_.get(currentUser, 'role'), role);
+    },
+    validateRoleSync(role) {
+      return validateRole(_.get(currentUser, 'role'), role);
     },
 
     /**
@@ -233,6 +251,7 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
       // eslint-disable-next-line no-sync
       return Auth.hasRoleSync('driver');
     },
+  
     /**
      * Get auth token
      *

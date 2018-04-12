@@ -31,6 +31,20 @@ export class manageaddressComponent {
     this.getAddress();
   }
 
+
+  delete(address) {
+    
+
+    this.$http.delete("/api/address/" + address._id).then(response => {
+      
+      this.addresss.splice(this.addresss.indexOf(address), 1);
+  
+    });
+  // user.$remove();
+
+}
+
+
   getAddress() {
     this.$http.get("/api/address").then(response => {
       this.addresss = response.data;

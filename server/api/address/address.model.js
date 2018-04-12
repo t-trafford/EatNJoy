@@ -11,7 +11,7 @@ var AddressSchema = new mongoose.Schema({
   state: String,
   country: String,
   type: String,
-  phone: Number,
+  zip: Number,
   user:{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 });
 

@@ -43,12 +43,9 @@ hr {
   border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
-/* body {
-  background: url('assets/images/bgimg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-} */
+.kida{
+  font-size: 2em;
+}
 
 html {
   width: 100%;
@@ -93,3 +90,5 @@ list-style: none;
 padding: 15px 10px;
 border-bottom: 1px solid rgba(100, 100, 100, 0.3);
 }
+
+input.radio {width: auto;}

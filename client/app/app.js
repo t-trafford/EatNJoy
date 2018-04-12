@@ -31,6 +31,7 @@ import socket from '../components/socket/socket.service';
 import contactus from './contactus/contactus.component';
 import managecard from './managecard/managecard.component';
 import reserveatable from './reserveatable/reserveatable.component';
+import viewcart from './viewcart/viewcart.component';
 import manageaddress from './manageaddress/manageaddress.component';
 import './app.css';
 
@@ -38,7 +39,7 @@ import './app.css';
 
 angular.module('eatnjoyApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, ngFileUpload, 'validation.match', navbar, footer, main, constants,
-  socket, util, welcome, contactus, manageaddress, reserveatable, managecard
+  socket, util, welcome, contactus, manageaddress, reserveatable, managecard, viewcart
 ])
 
   .config(routeConfig)

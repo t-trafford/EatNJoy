@@ -4,7 +4,7 @@
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     
 
-      <button ng-show="vm.isAdmin()" ui-sref-active="active" type="button" ng-click="vm.addCard()" class="btn btn-primary navigation">Add Card</button>
+      <button ui-sref-active="active" type="button" ng-click="vm.addCard()" class="btn btn-primary navigation">Add Card</button>
     </div>
   </div>
   <br>
@@ -16,10 +16,10 @@
       <input type="radio" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a ng-click="vm.addCard(card)"  class="edit"> <span class="fa fa-edit fa-2x"></span></a>
       &nbsp;&nbsp; <a ng-click="vm.delete(card)" class="trash"> <span class="fa fa-trash fa-2x"></span></a>
 
-      <div>{{card.name}}</div>
-        <div>{{card.cardnumber}}</div>
-        <div>{{card.expdate|date:'MM/yyyy'}}</div>
-        <div>{{card.cvv}}</div>
+    <b><div class="kida">{{card.name}}</div></b>
+        <div class="kida">{{card.cardnumber}}</div>
+        <div class="kida">{{card.expmon}}/{{card.expyear}}</div>
+        <div class="kida">{{card.cvv}}</div>
     </div>
 </div>
 

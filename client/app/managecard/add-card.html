@@ -15,27 +15,43 @@
       <div class="form-group">
         <label for="cardnumber">Card Number: </label>
 
-        <input type="number" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" name="cardnumber" class="form-control" ng-model="vm.newCard.cardnumber" required
-            mongoose-error/>
-        <div class="invalid-feedback" ng-show="form.$submitted && form.phone.$invalid">
-            <span class="error" ng-show="form.phone.$error.required">Valid Card Number is required.</span>
-            <span class="error" ng-show="form.phone.$error.pattern">Invalid Card Number.</span>
-        </div>
+        <input type="number" name="cardnumber" class="form-control" ng-model="vm.newCard.cardnumber" required
+            minlength="16" maxlength="16" mongoose-error/>
+        <div class="invalid-feedback" ng-show="form.$submitted && form.cardnumber.$invalid">
+            <span class="error" ng-show="form.cardnumber.$error.required">Valid Card Number is required.</span>
+            <span class="error" ng-show="form.cardnumber.$error.maxlength">Invalid Card Number.</span>
+            <span class="error" ng-show="form.cardnumber.$error.minlength">Invalid Card Number.</span>
+         </div>
     </div>
 
     <div class="form-group">
-      <label for="expdate">Expiry Date: </label>
-      <input type="date" class="form-control is-invalid" required name="expdate" ng-model="vm.newCard.expdate">
-      <div class="invalid-feedback" ng-show="form.$submitted && form.expdate.$invalid">
-        <span class="error" ng-show="form.address1.$error.required">Expiry Date is required.</span>
+      <label for="expmon">Expiry Month: </label>
+      <input type="number" ng-pattern="/[1-9]|1[012]/" class="form-control is-invalid" min="1" max="12" required name="expmon" ng-model="vm.newCard.expmon">
+      <div class="invalid-feedback" ng-show="form.$submitted && form.expmon.$invalid">
+        <span class="error" ng-show="form.expmon.$error.required">Expiry Month is required.</span>
+        <span class="error" ng-show="form.expmon.$error.min">Expiry Month value is invalid.</span>
+        <span class="error" ng-show="form.expmon.$error.max">Expiry Month value is invalid.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="expyear">Expiry Year: </label>
+      <input type="number" class="form-control is-invalid" required name="expyear" min="2018" max="2050" ng-model="vm.newCard.expyear">
+      <div class="invalid-feedback" ng-show="form.$submitted && form.expyear.$invalid">
+        <span class="error" ng-show="form.expyear.$error.required">Expiry Year is required.</span>
+        <span class="error" ng-show="form.expyear.$error.min">Expiry Year value is invalid.</span>
+        <span class="error" ng-show="form.expyear.$error.max">Expiry Year value is invalid.</span>
+
       </div>
     </div>
 
      <div class="form-group">
       <label for="cvv">CVV Number: </label>
-      <input type="number" class="form-control is-invalid" required name="cvv" ng-model="vm.newCard.cvv">
+      <input type="number" class="form-control is-invalid" required name="cvv"  minlength="3" maxlength="3" ng-model="vm.newCard.cvv">
       <div class="invalid-feedback" ng-show="form.$submitted && form.cvv.$invalid">
-        <span class="error" ng-show="form.address1.$error.required">CVV Number is required.</span>
+        <span class="error" ng-show="form.cvv.$error.required">CVV Number is required.</span>
+        <span class="error" ng-show="form.cvv.$error.minlength">Invalid CVV Number.</span>
+        <span class="error" ng-show="form.cvv.$error.maxlength">Invalid CVV Number.</span>
       </div>
     </div>
 

@@ -6,7 +6,8 @@ import {registerEvents} from './card.events';
 var CardSchema = new mongoose.Schema({
   name: String,
   cardnumber: Number,
-  expdate: Date,
+  expmon: Number,
+  expyear: Number,
   cvv: Number,
   user:{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 });

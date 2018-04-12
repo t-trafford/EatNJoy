@@ -3,7 +3,7 @@
    
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-      <button ng-show="vm.isAdmin()" ui-sref-active="active" type="button" ng-click="vm.addAddress()" class="btn btn-primary navigation">Add Address</button>
+      <button  ui-sref-active="active" type="button" ng-click="vm.addAddress()" class="btn btn-primary navigation">Add Address</button>
     </div>
   </div>
   <br>
@@ -13,15 +13,14 @@
   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="ad in vm.addresss">
     <div class="thumbnail" >
       <input type="radio" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a ng-click="vm.addAddress(ad)" class="edit"> <span class="fa fa-edit fa-2x"></span></a>
-      &nbsp;&nbsp; <a ng-click="" class="trash"> <span class="fa fa-trash fa-2x"></span></a>
+      &nbsp;&nbsp; <a ng-click="vm.delete(ad)" class="trash"> <span class="fa fa-trash fa-2x"></span></a>
 
-      <div class="fooditemname">{{ad.name}}</div>
-        <div class="fooditemprice">{{ad.address1}}</div>
+     <b><div class="fooditemname">{{ad.name}}</div></b>
+        <div class="fooditemprice">{{ad.address1}},</div>
         <div class="fooditemprice">{{ad.address2}}</div>
         <div class="fooditemprice">{{ad.city}}</div>
-        <div class="fooditemprice">{{ad.state}}</div>
-        <div class="fooditemprice">{{ad.country}}</div>
-        <div class="fooditemprice">{{ad.type}}</div>
+        <div class="fooditemprice">{{ad.state}}, {{ad.country}} - {{ad.zip}}</div>
+        <!-- <div class="fooditemprice">{{ad.type}}</div -->
     </div>
 </div>
 

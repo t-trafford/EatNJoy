@@ -12,17 +12,7 @@
       </div>
     </div>
 
-      <div class="form-group">
-        <label for="phone">Phone: </label>
-
-        <input type="text" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" name="phone" class="form-control" ng-model="vm.newAddress.phone" required
-            mongoose-error/>
-        <div class="invalid-feedback" ng-show="form.$submitted && form.phone.$invalid">
-            <span class="error" ng-show="form.phone.$error.required">Valid Phone is required.</span>
-            <span class="error" ng-show="form.phone.$error.pattern">Invalid Phone.</span>
-        </div>
-    </div>
-
+  
     <div class="form-group">
       <label for="address1">Address Line1: </label>
       <input type="text" class="form-control is-invalid" required name="address1" ng-model="vm.newAddress.address1">
@@ -60,13 +50,26 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <label for="zip">Zip Code: </label>
+
+      <input type="number"  minlength="5" maxlength="5" name="zip" class="form-control" ng-model="vm.newAddress.zip" required
+          mongoose-error/>
+      <div class="invalid-feedback" ng-show="form.$submitted && form.zip.$invalid">
+          <span class="error" ng-show="form.zip.$error.required">Zip Code is required.</span>
+          <span class="error" ng-show="form.zip.$error.minlength">Invalid Zip Code.</span>
+          <span class="error" ng-show="form.zip.$error.maxlength">Invalid Zip Code.</span>
+        
+        </div>
+  </div>
+
     
     <div class="form-group">
       <label for="type">Address Type:</label>
 
       <select name="type" id="type"  class="form-control" ng-model="vm.newAddress.type" required mongoose-error>
-          <option value="home">Home</option>
-          <option value="company">Company</option>
+          <option value="Home">Home</option>
+          <option value="Company">Company</option>
       </select>
      
       <div class="invalid-feedback" ng-show="form.$submitted && form.type.$invalid">
