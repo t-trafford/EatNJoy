@@ -7,6 +7,8 @@ import routing from "./reserveatable.routes";
 // const angular = require('angular');
 
 export class reserveatableComponent {
+
+
   /*@ngInject*/
   constructor($http, $scope, socket, $uibModal, Auth, Upload, appConfig) {
     // Use the User $resource to fetch all users
@@ -19,14 +21,26 @@ export class reserveatableComponent {
     this.isLoggedIn = Auth.isLoggedInSync;
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
+
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth();
+    var year = date.getFullYear();
+
+    var today = year + "-" + month + "-" + day;       
+    document.getElementById("theDate").value = today;
+
     $scope.$on("$destroy", function() {
-      socket.unsyncUpdates("card");
+      socket.unsyncUpdates("reserveatable");
     });
+
   }
 
   $onInit() {
     this.getCurrentBookingTable();
   }
+
+
 
   getCurrentBookingTable() {
 
@@ -54,6 +68,8 @@ export class reserveatableComponent {
     }
   }
 } 
+
+
 
 export default angular.module('eatnjoyApp.reserveatable', [uiRouter])
 .config(routing)

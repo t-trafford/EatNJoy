@@ -43,7 +43,7 @@
 
                     <label for="datetime">Select Date & Time:</label>
 
-                    <input type="datetime-local" name="datetime" class="form-control" ng-model="vm.newBooking.time" required mongoose-error/>
+                    <input type="date" name="datetime" id="theDate" class="form-control" ng-model="vm.newBooking.time" required mongoose-error/>
                     <div class="invalid-feedback" ng-show="form.$submitted && form.datetime.$invalid">
                         <span class="error" ng-show="form.datetime.$error.required">Date and Time is required. </span>
                     </div>
@@ -57,14 +57,22 @@
             </form>
             </div>
             </div>
-        </div>
-        <div class="col-sm-8">
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- <div class="col-sm-8">
             <div class="col-md-6" ng-repeat="rtable in vm.reservetables">
-                <p>{{rtable.name}}</p>
-                <p>{{rtable.person}}</p>
-                <p>{{rtable.email}}</p>
-                <p>{{rtable.time|date: 'MM/dd/yyyy hh:mm'}}</p>
+                <p>Table On {{rtable.name}}'s Name For {{rtable.person}} Persons is Booked on {{rtable.time|date: 'MM/dd/yyyy'}} at {{rtable.time|date: 'hh:mm'}} </p>
             </div>
+        </div> -->
+            <br>
+        <div class="thumbnail">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"   ng-repeat="rtable in vm.reservetables">
+                <p class="reservetabe">{{rtable.name}}</p>
+                <p class="reservetabe2"><b>No of Person:</b>&nbsp;{{rtable.person}}</p>
+                <p class="reservetabe2"><a>{{rtable.email}}</a></p>
+                <p class="reservetabe2">{{rtable.time|date: 'MM/dd/yyyy'}} </p>
+                <p class="reservetabe2">{{rtable.time|date: 'hh:mm'}}</p>
+            </div><hr>
         </div>
+    </div>
     </div>
 </div>

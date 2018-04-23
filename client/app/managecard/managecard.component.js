@@ -47,6 +47,13 @@ export class managecardComponent {
     this.$http.delete("/api/cards/" + card._id).then(response => {
       
       this.cards.splice(this.cards.indexOf(card), 1);
+      this.$http.get("/api/cards").then(response => {
+        this.cards = (response.data||[]).map(itm=>{
+          itm.expdate = new Date(itm.expdate); 
+          return itm;
+        });
+        this.socket.syncUpdates("card", this.cards);
+      });
   
     });
   // user.$remove();

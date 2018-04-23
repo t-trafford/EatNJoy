@@ -94,7 +94,7 @@ export default angular
     vm.isLoggedIn = Auth.isLoggedInSync;
     vm.isAdmin = Auth.isAdminSync;
     vm.getCurrentUser = Auth.getCurrentUserSync;
-
+    vm.validateRoleSync = Auth.validateRoleSync;
 
     vm.uploadFiles = function(file, form) {
       if (!file || form.file.$invalid) {

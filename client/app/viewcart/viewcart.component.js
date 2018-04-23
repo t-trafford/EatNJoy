@@ -1,66 +1,65 @@
 import angular from "angular";
 import uiRouter from "angular-ui-router";
 import routing from "./viewcart.routes";
+'use strict';
 
 export class viewcartComponent {
-  constructor(cart, $http, $scope, socket, $uibModal, Auth, appConfig) {
+    /*@ngInject*/
+  constructor($http, $scope, socket, $uibModal, Auth, appConfig) {
     
     // Use the User $resource to fetch all users
     this.$http = $http;
     this.appConfig = appConfig;
     this.$uibModal = $uibModal;
+    this.cart = {};
     this.isLoggedIn = Auth.isLoggedInSync;
     this.isAdmin = Auth.isAdminSync;
     this.Auth = Auth;
     this.getCurrentUser = Auth.getCurrentUserSync;
-
-    // Use the User $resource to fetch all users
-    this.cart = cart;
     $scope.$on("$destroy", function() {
-      socket.unsyncUpdates("cart");
+      socket.unsyncUpdates("viewcart");
     });
     this.getCartItem();
   }
-  cart = {};
+
+  $onInit() {
+    this.getCartItem();
+  }
+  // cart = {};
 
   getCartItem(){
     // this.users = this.User.getEmployee();
 
     this.$http.get("/api/carts").then(response => {
-      this.cart = (response.data||[]);
-      this.socket.syncUpdates("cart", this.cart);
+      this.carts = (response.data||[]);
+      this.socket.syncUpdates("cart", this.carts);
     });
   }
 
+  deleteCartItem(cart){
+    this.$http.delete("/api/carts/" + cart._id).then(response => {
+      
+      this.carts.splice(this.carts.indexOf(cart), 1);
+      this.$http.get("/api/carts").then(response => {
+        this.carts = (response.data||[]).map(itm=>{
+          itm.expdate = new Date(itm.expdate); 
+          return itm;
+        });
+        this.socket.syncUpdates("cart", this.carts);
+      });
+  
+    });
+  }
+
+
+
 }
 
-export default angular
-  .module("eatnjoyApp.viewcart", [uiRouter])
-  .config(routing)
-  .controller('addItemController',['$http', '$scope', 'socket', '$uibModal', 'Auth', 'Upload', 'appConfig','item', 'cart',
-  function ($http, $scope, socket, $uibModal, Auth, Upload, appConfig,item) {
-    var vm =this;
-    vm.$http = $http;
-    vm.newCart = cart||{};
-    vm.socket = socket;
-    vm.appConfig = appConfig;
-    vm.$uibModal = $uibModal;
-    vm.Upload = Upload;
-    vm.isLoggedIn = Auth.isLoggedInSync;
-    vm.isAdmin = Auth.isAdminSync;
-    vm.isCustomer = Auth.isCustomerSync;
-    vm.getCurrentUser = Auth.getCurrentUserSync;
-    vm.validateRoleSync = Auth.validateRoleSync;
-
-
-       
-
-  
-
-  }])
-  .component('viewcart', {
-    template: require("./viewcart.html"),
+export default angular.module('eatnjoyApp.viewcart', [uiRouter])
+.config(routing)
+.component('viewcart', {
+    template: require('./viewcart.html'),
     controller: viewcartComponent,
-    controllerAs: "vm"
+    controllerAs: 'vm'
   })
   .name;

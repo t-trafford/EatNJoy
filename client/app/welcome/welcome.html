@@ -16,9 +16,9 @@
         <div ng-if="item.foodImage"  ng-click="vm.addItem(item)">
           <img height="191" width="378" ng-src="{{vm.appConfig.apiUrl + item.foodImage}}" alt="item image" srcset="">
         </div>
-       <b  ng-click="vm.addItem(item)"><div class="fooditemname">{{item.name}}</div></b> 
-        <b><div class="fooditemprice">${{item.price}}</div></b>
-        <div>{{item.ingredients}}</div>
+       <b ng-click="vm.addItem(item)"><div class="fooditemname">{{item.name}}</div></b> 
+        <div class="fooditemprice">${{item.price}}</div>
+        <div><b>Ingredients:</b> {{item.ingredients}}</div>
         <a href="" ng-show="!vm.isAdmin()"  ng-click="vm.addToCart(item)" class="btn btn-info btn-md">
           <span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart
         </a>

@@ -17,19 +17,19 @@
         <li ng-show="$ctrl.isLoggedIn()" ng-repeat="item in $ctrl.menu" ui-sref-active="active">
             <a ui-sref="{{item.state}}" href="/welcome">{{item.title}}</a>
         </li>
-        <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="admin">Manage Employees </a></li>
+        <li ng-show="$ctrl.validateRoleSync('manager') && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="admin">Manage Employees </a></li>
         <li ng-show="$ctrl.validateRoleSync('user') && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="manageaddress">Manage Address </a></li>
         <!-- <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="">Reserve a Table </a></li> -->
         <li ng-show="$ctrl.validateRoleSync('user') && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="managecard">Manage Cards </a></li>
         <li ng-show="$ctrl.validateRoleSync('user') && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="contactus"> Contact Us </a></li>
-        <li ng-show="($ctrl.isAdmin() && $ctrl.isLoggedIn()) || ($ctrl.validateRoleSync('user') && $ctrl.isLoggedIn())" ui-sref-active="active"><a ui-sref="reserveatable">Reserve a Table </a></li>
+        <li ng-show="($ctrl.validateRoleSync('manager') && $ctrl.isLoggedIn()) || ($ctrl.validateRoleSync('user') && $ctrl.isLoggedIn())" ui-sref-active="active"><a ui-sref="reserveatable">Reserve a Table </a></li>
     
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="signup">Sign up <i class="fa fa-user-plus"></i></a></li>
         <li ng-hide="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Login <i class="fa fa-user"></i></a></li>
-        <li ng-show="!$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="viewcart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+        <li ng-show="$ctrl.validateRoleSync('user') && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="viewcart"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
         <li ng-show="$ctrl.isLoggedIn()"><p class="navbar-text">Hello {{ $ctrl.getCurrentUser().name }}</p> </li>
         <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
         <li ng-show="$ctrl.isLoggedIn()"><a ui-sref="logout">Logout</a></li>

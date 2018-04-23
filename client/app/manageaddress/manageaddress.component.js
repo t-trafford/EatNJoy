@@ -38,7 +38,10 @@ export class manageaddressComponent {
     this.$http.delete("/api/address/" + address._id).then(response => {
       
       this.addresss.splice(this.addresss.indexOf(address), 1);
-  
+      this.$http.get("/api/address").then(response => {
+        this.addresss = response.data;
+        this.socket.syncUpdates("address", this.addresss);
+      });
     });
   // user.$remove();
 
