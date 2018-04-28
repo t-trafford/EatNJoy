@@ -12,6 +12,7 @@ import uiRouter from 'angular-ui-router';
 import uiBootstrap from 'angular-ui-bootstrap';
 import 'angular-validation-match';
 import ngFileUpload from 'ng-file-upload';
+import 'angularjs-toaster';
 
 import {
   routeConfig
@@ -32,6 +33,7 @@ import contactus from './contactus/contactus.component';
 import managecard from './managecard/managecard.component';
 import reserveatable from './reserveatable/reserveatable.component';
 import viewcart from './viewcart/viewcart.component';
+import vieworder from './vieworder/vieworder.component';
 import manageaddress from './manageaddress/manageaddress.component';
 import './app.css';
 
@@ -39,7 +41,7 @@ import './app.css';
 
 angular.module('eatnjoyApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
   uiBootstrap, _Auth, account, admin, ngFileUpload, 'validation.match', navbar, footer, main, constants,
-  socket, util, welcome, contactus, manageaddress, reserveatable, managecard, viewcart
+  socket, util, welcome, contactus, manageaddress, reserveatable, managecard, viewcart, vieworder, 'toaster'
 ])
 
   .config(routeConfig)

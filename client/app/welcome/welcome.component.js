@@ -5,7 +5,7 @@ import routing from "./welcome.routes";
 export class welcomecontroller {
   newItem = {};
   /*@ngInject*/
-  constructor($http, $scope, socket, $uibModal, Auth, Upload, appConfig) {
+  constructor($http, toaster, $scope, socket, $uibModal, Auth, Upload, appConfig) {
     // Use the User $resource to fetch all users
     this.$http = $http;
     this.socket = socket;
@@ -20,6 +20,7 @@ export class welcomecontroller {
     this.isEmployee = Auth.isEmployeeSync;
     this.isCustomer = Auth.isCustomerSync;
     this.isDriver = Auth.isDriverSync;
+    this.toaster = toaster;
 
     $scope.$on("$destroy", function() {
       socket.unsyncUpdates("item");
@@ -30,14 +31,17 @@ export class welcomecontroller {
     this.getItem();
   }
   
+  
   addToCart(item) {
-      if (this.Auth.isLoggedInSync()) {
-        this.$http.post("/api/carts", {
-          item: item._id
-        }).then(function(res) {
-        });
-      }
-  }
+    var vm = this;
+    if (this.Auth.isLoggedInSync()) {
+      this.$http.post("/api/carts", {
+        item: item._id
+      }).then((toaster)=> {
+        vm.toaster.pop('success', "Item", "Added To Cart Successfully.", 2000);
+      });
+    }
+};
 
   getItem() {
     this.$http.get("/api/items").then(response => {
@@ -82,8 +86,8 @@ export class welcomecontroller {
 export default angular
   .module("eatnjoyApp.welcome", [uiRouter])
   .config(routing)
-  .controller('addItemController',['$http', '$scope', 'socket', '$uibModal', 'Auth', 'Upload', 'appConfig','item', 
-  function ($http, $scope, socket, $uibModal, Auth, Upload, appConfig,item) {
+  .controller('addItemController',['toaster','$http', '$scope', 'socket', '$uibModal', 'Auth', 'Upload', 'appConfig','item', 
+  function (toaster,$http, $scope, socket, $uibModal, Auth, Upload, appConfig,item) {
     var vm =this;
     vm.$http = $http;
     vm.newItem = item||{};
@@ -134,10 +138,12 @@ export default angular
       if (vm.newItem._id) {
         delete vm.newItem.__v;
         vm.$http.put("/api/items/"+vm.newItem._id, vm.newItem).then(function(res) {
+          toaster.pop('success', "Food Item", "Updated Successfully.", 2000);
           $close(res.data);
         });
       }else{
         vm.$http.post("/api/items", vm.newItem).then(function(res) {
+          toaster.pop('success', "Food Item", "Added Successfully.", 2000);
           $close(res.data);
         });
       }

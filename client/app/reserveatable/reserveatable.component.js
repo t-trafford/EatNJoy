@@ -10,7 +10,7 @@ export class reserveatableComponent {
 
 
   /*@ngInject*/
-  constructor($http, $scope, socket, $uibModal, Auth, Upload, appConfig) {
+  constructor($http,toaster, $scope, socket, $uibModal, Auth, Upload, appConfig) {
     // Use the User $resource to fetch all users
     this.$http = $http;
     this.socket = socket;
@@ -21,6 +21,7 @@ export class reserveatableComponent {
     this.isLoggedIn = Auth.isLoggedInSync;
     this.isAdmin = Auth.isAdminSync;
     this.getCurrentUser = Auth.getCurrentUserSync;
+    this.toaster = toaster;
 
     var date = new Date();
     var day = date.getDate();
@@ -64,6 +65,7 @@ export class reserveatableComponent {
       });
     }else{
       vm.$http.post("/api/reservetables", vm.newBooking).then(function(res) {
+        vm.toaster.pop('success', "Booking Confirm", "You will receive an email for your reservation." , 2000);
       });
     }
   }

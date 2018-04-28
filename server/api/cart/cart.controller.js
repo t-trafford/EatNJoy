@@ -71,8 +71,8 @@ if (typeof req.user['_id'] == 'string') {
   query['user']=req.user['_id'];
 }
   return Cart.find(query)
-  .populate('user', 'email name phone').exec()
-  
+  .populate('user', 'email name phone')
+  .populate('item').exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

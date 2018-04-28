@@ -5,7 +5,7 @@ import routing from "./viewcart.routes";
 
 export class viewcartComponent {
     /*@ngInject*/
-  constructor($http, $scope, socket, $uibModal, Auth, appConfig) {
+  constructor($http, toaster, $scope, socket, $uibModal, Auth, appConfig) {
     
     // Use the User $resource to fetch all users
     this.$http = $http;
@@ -16,10 +16,15 @@ export class viewcartComponent {
     this.isAdmin = Auth.isAdminSync;
     this.Auth = Auth;
     this.getCurrentUser = Auth.getCurrentUserSync;
+    this.toaster = toaster;
+
     $scope.$on("$destroy", function() {
       socket.unsyncUpdates("viewcart");
     });
     this.getCartItem();
+
+    
+
   }
 
   $onInit() {
@@ -40,6 +45,7 @@ export class viewcartComponent {
     this.$http.delete("/api/carts/" + cart._id).then(response => {
       
       this.carts.splice(this.carts.indexOf(cart), 1);
+      this.toaster.pop('error', "Item", "Removed From Cart.", 2000);
       this.$http.get("/api/carts").then(response => {
         this.carts = (response.data||[]).map(itm=>{
           itm.expdate = new Date(itm.expdate); 

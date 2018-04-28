@@ -17,12 +17,14 @@
         <li ng-show="$ctrl.isLoggedIn()" ng-repeat="item in $ctrl.menu" ui-sref-active="active">
             <a ui-sref="{{item.state}}" href="/welcome">{{item.title}}</a>
         </li>
+        <li ng-show="($ctrl.validateRoleSync('manager') && $ctrl.isLoggedIn()) || ($ctrl.validateRoleSync('employee') && $ctrl.isLoggedIn())" ui-sref-active="active"><a ui-sref="vieworder">View Order </a></li>
         <li ng-show="$ctrl.validateRoleSync('manager') && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="admin">Manage Employees </a></li>
         <li ng-show="$ctrl.validateRoleSync('user') && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="manageaddress">Manage Address </a></li>
         <!-- <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="">Reserve a Table </a></li> -->
         <li ng-show="$ctrl.validateRoleSync('user') && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="managecard">Manage Cards </a></li>
         <li ng-show="$ctrl.validateRoleSync('user') && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="contactus"> Contact Us </a></li>
         <li ng-show="($ctrl.validateRoleSync('manager') && $ctrl.isLoggedIn()) || ($ctrl.validateRoleSync('user') && $ctrl.isLoggedIn())" ui-sref-active="active"><a ui-sref="reserveatable">Reserve a Table </a></li>
+
     
       </ul>
 
@@ -39,6 +41,8 @@
   </div>
 </div>
 <br>
+<toaster-container></toaster-container>
+
 <!-- <div class="sidebar sidebar-default sidebar-static-left">
       
       

@@ -1,14 +1,14 @@
 'use strict';
 
-describe('Component: viewcart', function() {
+describe('Component: vieworder', function() {
   // load the component's module
-  beforeEach(module('eatnjoyApp.viewcart'));
+  beforeEach(module('eatnjoyApp.vieworder'));
 
-  var viewcartComponent;
+  var vieworderComponent;
 
   // Initialize the component and a mock scope
   beforeEach(inject(function($componentController) {
-    viewcartComponent = $componentController('viewcart', {});
+    vieworderComponent = $componentController('vieworder', {});
   }));
 
   it('should ...', function() {

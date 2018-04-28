@@ -1,10 +1,10 @@
 <br><br>
 <div class="container">
-<table class="table table-striped table-bordered table-hover table-responsive">
+<table class="table table-bordered table-hover table-responsive bg" >
 
   <!--Table head-->
   <thead>
-      <tr>
+      <tr class="itemdata">
           <th>Item</th>
           <th>Quantity</th>
           <th>Price</th>
@@ -13,15 +13,15 @@
       </tr>
      </thead>
   <tbody >
-    <tr ng-repeat="cart in vm.carts">
-      <td>{{cart.items.name}}</td>
-      <td>{{cart.quantity}}</td>
-      <td></td>
+    <tr class="itemdata" ng-repeat="cart in vm.carts">
+      <td>{{cart.item.name}}</td>
+      <td>{{cart.quantity}} &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus" ng-click="" aria-hidden="true"></i> &nbsp;&nbsp;<i class="fa fa-minus" ng-click="" aria-hidden="true"></i> </td>
+      <td>{{cart.quantity * cart.item.price}}$</td>
       <td> <a ng-click="vm.deleteCartItem(cart)"  class="trash"> <span class="fa fa-trash fa-2x"></span></a></td>
   </tr>
 <td></td>
 <td></td>
-<td><b>Sub total: </b></td>
+<td><b class="subtotal">Sub total: </b> </td>
 
 
 </tbody>
