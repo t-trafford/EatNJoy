@@ -7,11 +7,11 @@
     <div class="col-sm-4">
       <form class="form" name="form" ng-submit="vm.login(form)" novalidate>
 
-        <div class="form-group" ng-class="{ 'has-success': form.email.$valid && vm.submitted,
+        <div class="input-field" ng-class="{ 'has-success': form.email.$valid && vm.submitted,
         'has-error': form.email.$invalid && vm.submitted }">
           <label>Email</label>
 
-          <input type="email" name="email" class="form-control" ng-model="vm.user.email" required mongoose-error/>
+          <input type="email" name="email" class="validate" ng-model="vm.user.email" required mongoose-error/>
           <p class="help-block" ng-show="form.email.$error.email && vm.submitted">
             Doesn't look like a valid email.
           </p>
@@ -24,11 +24,11 @@
         </div>
 
 
-        <div class="form-group" ng-class="{ 'has-success': form.password.$valid && vm.submitted,
+        <div class="input-field" ng-class="{ 'has-success': form.password.$valid && vm.submitted,
     'has-error': form.password.$invalid && vm.submitted }">
           <label>Password</label>
 
-          <input type="password" name="password" class="form-control" ng-model="vm.user.password" ng-minlength="3" required mongoose-error/>
+          <input type="password" name="password" class="validate" ng-model="vm.user.password" ng-minlength="3" required mongoose-error/>
           <p class="help-block" ng-show="form.password.$error.minlength && vm.submitted">
             Password must be at least 3 characters.
           </p>
@@ -47,7 +47,7 @@
         </div>
    
 
-    <!-- <div class="form-group has-error">
+    <!-- <div class="input-field has-error">
           <p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && vm.submitted">
             Please enter your email and password.
          </p>

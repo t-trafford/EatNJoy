@@ -1,6 +1,6 @@
-import angular from "angular";
-import uiRouter from "angular-ui-router";
-import routing from "./manageaddress.routes";
+import angular from 'angular';
+import uiRouter from 'angular-ui-router';
+import routing from './manageaddress.routes';
 
 
 'use strict';
@@ -22,8 +22,8 @@ export class manageaddressComponent {
     this.getCurrentUser = Auth.getCurrentUserSync;
 
 
-    $scope.$on("$destroy", function() {
-      socket.unsyncUpdates("address");
+    $scope.$on('$destroy', function() {
+      socket.unsyncUpdates('address');
     });
   }
 
@@ -33,38 +33,34 @@ export class manageaddressComponent {
 
 
   delete(address) {
-    
-
-    this.$http.delete("/api/address/" + address._id).then(response => {
-      
+    this.$http.delete('/api/address/' + address._id).then(response => {
       this.addresss.splice(this.addresss.indexOf(address), 1);
-      this.$http.get("/api/address").then(response => {
+      this.$http.get('/api/address').then(response => {
         this.addresss = response.data;
-        this.socket.syncUpdates("address", this.addresss);
+        this.socket.syncUpdates('address', this.addresss);
       });
     });
   // user.$remove();
-
-}
+  }
 
 
   getAddress() {
-    this.$http.get("/api/address").then(response => {
+    this.$http.get('/api/address').then(response => {
       this.addresss = response.data;
-      this.socket.syncUpdates("address", this.addresss);
+      this.socket.syncUpdates('address', this.addresss);
     });
   }
 
   addAddress(address) {
-    this.newAddress = angular.copy(address||{});
+    this.newAddress = angular.copy(address || {});
     var vm = this;
     var modalInstance = this.$uibModal.open({
-      template: require("./add-address.html"),
-      windowClass: "modal-default",
+      template: require('./add-address.html'),
+      windowClass: '',
       controller: 'addAddressController',
-      controllerAs: "vm",
-      resolve:{
-        address: function () {
+      controllerAs: 'vm',
+      resolve: {
+        address() {
           return vm.newAddress;
         }
       }
@@ -76,11 +72,10 @@ export class manageaddressComponent {
         vm.getAddress();
         vm.newAddress = {};
         vm.getAddress();
-
       },
 
       function() {
-        console.log("modal-component dismissed at: " + new Date());
+        console.log('modal-component dismissed at: ' + new Date());
       }
     );
   }
@@ -88,13 +83,13 @@ export class manageaddressComponent {
 }
 
 export default angular
-  .module("eatnjoyApp.manageaddress", [uiRouter])
+  .module('eatnjoyApp.manageaddress', [uiRouter])
   .config(routing)
-  .controller('addAddressController',['$http', '$scope', 'socket', '$uibModal', 'Auth', 'appConfig','address', 
-  function ($http, $scope, socket, $uibModal, Auth, appConfig,address) {
-    var vm =this;
+  .controller('addAddressController', ['$http', '$scope', 'socket', '$uibModal', 'Auth', 'appConfig', 'address',
+  function($http, $scope, socket, $uibModal, Auth, appConfig, address) {
+    var vm = this;
     vm.$http = $http;
-    vm.newAddress = address||{};
+    vm.newAddress = address || {};
     vm.socket = socket;
     vm.appConfig = appConfig;
     vm.$uibModal = $uibModal;
@@ -103,52 +98,26 @@ export default angular
     vm.getCurrentUser = Auth.getCurrentUserSync;
 
     vm.saveAddress = function(form, $close) {
-      if (form.$invalid) {
+      if(form.$invalid) {
         return;
       }
-      if (vm.newAddress._id) {
+      if(vm.newAddress._id) {
         delete vm.newAddress.__v;
-        vm.$http.put("/api/address/"+vm.newAddress._id, vm.newAddress).then(function(res) {
+        vm.$http.put('/api/address/' + vm.newAddress._id, vm.newAddress).then(function(res) {
           $close(res.data);
         });
-      }else{
-        vm.$http.post("/api/address", vm.newAddress).then(function(res) {
+      }else {
+        vm.$http.post('/api/address', vm.newAddress).then(function(res) {
           $close(res.data);
         });
       }
-    }
-
+    };
   }])
   .component('manageaddress', {
-    template: require("./manageaddress.html"),
+    template: require('./manageaddress.html'),
     controller: manageaddressComponent,
-    controllerAs: "vm"
+    controllerAs: 'vm'
   })
   .name;
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -1,31 +1,43 @@
-<br><br>
+<br>
+<br>
 <div class="container">
-<table class="table table-bordered table-hover table-responsive bg" >
+  <table class="highlight">
 
-  <!--Table head-->
-  <thead>
-      <tr class="itemdata">
-          <th>Item</th>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th></th>
-   
+    <!--Table head-->
+    <thead>
+      <tr class="">
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th></th>
+
       </tr>
-     </thead>
-  <tbody >
-    <tr class="itemdata" ng-repeat="cart in vm.carts">
-      <td>{{cart.item.name}}</td>
-      <td>{{cart.quantity}} &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus" ng-click="" aria-hidden="true"></i> &nbsp;&nbsp;<i class="fa fa-minus" ng-click="" aria-hidden="true"></i> </td>
-      <td>{{cart.quantity * cart.item.price}}$</td>
-      <td> <a ng-click="vm.deleteCartItem(cart)"  class="trash"> <span class="fa fa-trash fa-2x"></span></a></td>
-  </tr>
-<td></td>
-<td></td>
-<td><b class="subtotal">Sub total: </b> </td>
+    </thead>
+    <tbody>
+      <tr class="" ng-repeat="cart in vm.carts">
+        <td>{{cart.item.name}}</td>
+        <td>{{cart.quantity}} &nbsp;&nbsp;&nbsp;&nbsp;
+          <i class="fa fa-plus" ng-click="" aria-hidden="true"></i> &nbsp;&nbsp;
+          <i class="fa fa-minus" ng-click="" aria-hidden="true"></i>
+        </td>
+        <td>{{cart.quantity * cart.item.price}}$</td>
+        <td>
+          <a ng-click="vm.deleteCartItem(cart)" class="trash">
+            <span class="fa fa-trash fa-2x"></span>
+          </a>
+        </td>
+      </tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+        <b class="subtotal">Sub total: </b>
+      </td>
 
 
-</tbody>
-</table>
-<button  ui-sref-active="active" type="button" ng-click=""  class="btn btn-info btn-lg">Proceed To Checkout</button>
+    </tbody>
+  </table>
+  <br><br>
+  <button ui-sref-active="active" type="button" ng-click="" class="btn btn-info btn-lg">Proceed To Checkout</button>
 
 </div>

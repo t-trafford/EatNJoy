@@ -1,5 +1,6 @@
 @import '~bootstrap/dist/css/bootstrap.css';
 @import '~angularjs-toaster/toaster.min.css';
+@import '~materialize-css/dist/css/materialize.min.css';
 /**
  * Bootstrap Fonts
  */
@@ -48,6 +49,10 @@ body {
   background-attachment: fixed;
 }
 
+.modal-dialog {
+  width: auto;
+  margin: 0px;
+}
 
 /* Component styles are injected through gulp */
 /* inject:css */

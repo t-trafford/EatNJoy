@@ -1,70 +1,88 @@
 <div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <h1>Reserve A Table</h1>
+  <div class="row">
+    <div class="col-sm-12 card">
+      <h1>Reserve A Table</h1>
+    </div>
+    <div class="col s12">
+      <form class="form" name="form" ng-submit="vm.addBooking(form)" novalidate>
+
+        <div class="card">
+          <div class="input-field col s6">
+            <!-- <i class="material-icons prefix">account_circle</i> -->
+            <input id="nameI" name="nameI" type="text" required class="validate" ng-model="vm.newBooking.name">
+            <label for="nameI">Name</label>
+            <div class="invalid-feedback" ng-show="form.$submitted && form.nameI.$invalid">
+              <span class="error" ng-show="form.nameI.$error.required">Name is required. </span>
+            </div>
+          </div>
+          <div class="input-field col s6">
+            <input id="person" name="person" type="number" class="validate" ng-model="vm.newBooking.person" required mongoose-error>
+            <label for="person">No of Person</label>
+            <div class="invalid-feedback" ng-show="form.$submitted && form.person.$invalid">
+              <span class="error" ng-show="form.person.$error.required">No of Person is required. </span>
+            </div>
+          </div>
         </div>
-        <div class="col-sm-4">
-            <form class="form" name="form" ng-submit="vm.addBooking(form)" novalidate>
 
-                <div class="form-group">
-                    <label for="nameI">Name: </label>
-                    <input type="text" class="form-control is-invalid" required name="nameI" ng-model="vm.newBooking.name">
-                    <div class="invalid-feedback" ng-show="form.$submitted && form.nameI.$invalid">
-                        <span class="error" ng-show="form.nameI.$error.required">Name is required.</span>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="person">No of Person:</label>
-
-                    <input type="person" name="person" class="form-control" ng-model="vm.newBooking.person" required mongoose-error/>
-
-                    <div class="invalid-feedback" ng-show="form.$submitted && form.person.$invalid">
-                        <span class="error" ng-show="form.person.$error.required">No of Person is required. </span>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="email">Email:</label>
-
-                    <input type="email" name="email" class="form-control" ng-model="vm.newBooking.email" required mongoose-error/>
-                    <div class="invalid-feedback" ng-show="form.$submitted && form.email.$invalid">
-                        <span class="error" ng-show="form.email.$error.email"> Doesn't look like a valid email.</span>
-                    </div>
-                    <div class="invalid-feedback" ng-show="form.$submitted && form.email.$invalid">
-                        <span class="error" ng-show="form.email.$error.required">Email address is required. </span>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="datetime">Select Date & Time:</label>
-
-                    <input type="datetime-local" name="datetime" id="theDate" class="form-control" ng-model="vm.newBooking.time" required mongoose-error/>
-                    <div class="invalid-feedback" ng-show="form.$submitted && form.datetime.$invalid">
-                        <span class="error" ng-show="form.datetime.$error.required">Date and Time is required. </span>
-                    </div>
-                    <br>
-                    <div>
-                        <br>
-                        <div>
-                            <button class="btn btn-primary btn-lg" type="submit">Reserve Table</button>
-                        </div>
-
-            </form>
+        <div class="card">
+          <div class="input-field col s12">
+            <input id="email" name="email" type="email" class="validate" ng-model="vm.newBooking.email" required mongoose-error>
+            <label for="email" data-error="wrong" data-success="right">Email</label>
+            <div class="invalid-feedback" ng-show="form.$submitted && form.email.$invalid">
+              <span class="error" ng-show="form.email.$error.email"> Doesn't look like a valid email.</span>
             </div>
+            <div class="invalid-feedback" ng-show="form.$submitted && form.email.$invalid">
+              <span class="error" ng-show="form.email.$error.required">Email address is required. </span>
             </div>
-        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <!-- <div class="col-sm-8">
+          </div>
+        </div>
+
+        <!-- <div class="card">
+          <div class="input-field col s6">
+            <input id="date" name="date" type="text" required class="datepicker validate" ng-model="vm.newBooking.date">
+            <label for="date">Date</label>
+            <div class="invalid-feedback" ng-show="form.$submitted && form.date.$invalid">
+              <span class="error" ng-show="form.date.$error.required">Name is required. </span>
+            </div>
+          </div>
+          <div class="input-field col s6">
+            <input id="datetime" name="datetime" type="text" class="timepicker validate" ng-model="vm.newBooking.datetime" required mongoose-error>
+            <label for="datetime">Time</label>
+            <div class="invalid-feedback" ng-show="form.$submitted && form.datetime.$invalid">
+              <span class="error" ng-show="form.datetime.$error.required">No of Person is required. </span>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="form-group">
+
+          <label for="datetime">Select Date & Time:</label>
+          <input type="datetime-local" name="datetime" id="theDate" class="form-control" ng-model="vm.newBooking.time" required mongoose-error/>
+          <div class="invalid-feedback" ng-show="form.$submitted && form.datetime.$invalid">
+            <span class="error" ng-show="form.datetime.$error.required">Date and Time is required. </span>
+          </div>
+          <div class="invalid-feedback" ng-show="form.$submitted && form.datetime.$invalid">
+            <span class="error" ng-show="form.datetime.$error.datetimelocal">Date and/or Time is missing. </span>
+          </div>
+          <br>
+          <div>
+            <br>
+            <div>
+              <button class="btn btn-primary btn-lg" type="submit">Reserve Table</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!-- <div class="col-sm-8">
             <div class="col-md-6" ng-repeat="rtable in vm.reservetables">
                 <p>Table On {{rtable.name}}'s Name For {{rtable.person}} Persons is Booked on {{rtable.time|date: 'MM/dd/yyyy'}} at {{rtable.time|date: 'hh:mm'}} </p>
             </div>
         </div> -->
-            <br>
-        <!-- <div class="thumbnail">
+<br>
+<!-- <div class="thumbnail">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"   ng-repeat="rtable in vm.reservetables">
                 <p class="reservetabe">{{rtable.name}}</p>
                 <p class="reservetabe2"><b>No of Person:</b>&nbsp;{{rtable.person}}</p>
@@ -73,6 +91,33 @@
                 <p class="reservetabe2">{{rtable.time|date: 'hh:mm'}}</p>
             </div><hr>
         </div> -->
-    </div>
-    </div>
 </div>
+</div>
+</div>
+
+<!-- <script>
+  $(document).ready(function () {
+    $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15, // Creates a dropdown of 15 years to control year,
+      today: 'Today',
+      clear: 'Clear',
+      close: 'Ok',
+      closeOnSelect: false, // Close upon selecting a date,
+      container: undefined // ex. 'body' will append picker to body
+    });
+    $('.timepicker').pickatime({
+      default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+      fromnow: 0, // set default time to * milliseconds from now (using with default = 'now')
+      twelvehour: false, // Use AM/PM or 24-hour format
+      donetext: 'OK', // text for done-button
+      cleartext: 'Clear', // text for clear-button
+      canceltext: 'Cancel', // Text for cancel-button,
+      container: undefined, // ex. 'body' will append picker to body
+      autoclose: false, // automatic close timepicker
+      ampmclickable: true // make AM PM clickable
+      // aftershow: function () {} //Function for after opening timepicker
+    });
+  });
+
+</script> -->

@@ -1,16 +1,14 @@
-import angular from "angular";
-import uiRouter from "angular-ui-router";
-import routing from "./reserveatable.routes";
+import angular from 'angular';
+import uiRouter from 'angular-ui-router';
+import routing from './reserveatable.routes';
 'use strict';
-
 
 // const angular = require('angular');
 
 export class reserveatableComponent {
 
-
   /*@ngInject*/
-  constructor($http,toaster, $scope, socket, $uibModal, Auth, Upload, appConfig) {
+  constructor($http, toaster, $scope, socket, $uibModal, Auth, Upload, appConfig) {
     // Use the User $resource to fetch all users
     this.$http = $http;
     this.socket = socket;
@@ -28,54 +26,64 @@ export class reserveatableComponent {
     var month = date.getMonth();
     var year = date.getFullYear();
 
-    var today = year + "-" + month + "-" + day;       
-    document.getElementById("theDate").value = today;
+    var today = year + '-' + month + '-' + day;
+    document
+      .getElementById('theDate')
+      .value = today;
 
-    $scope.$on("$destroy", function() {
-      socket.unsyncUpdates("reserveatable");
+    $scope.$on('$destroy', function() {
+      socket.unsyncUpdates('reserveatable');
     });
-
   }
 
   $onInit() {
     this.getCurrentBookingTable();
   }
 
-
-
   getCurrentBookingTable() {
-
-    this.$http.get("/api/reservetables").then(response => {
-      this.reservetables = (response.data||[]).map(itm=>{
-        itm.time = new Date(itm.time); 
-        return itm;
+    this
+      .$http
+      .get('/api/reservetables')
+      .then(response => {
+        this.reservetables = (response.data || []).map(itm => {
+          itm.time = new Date(itm.time);
+          return itm;
+        });
+        this
+          .socket
+          .syncUpdates('reservetables', this.reservetables);
       });
-      this.socket.syncUpdates("reservetables", this.reservetables);
-    });
   }
 
   addBooking(form) {
-    if (form.$invalid) {
+    console.log(this.newBooking);
+    if(form.$invalid) {
       return;
     }
-    var vm =this;
-    if (vm.newBooking._id) {
+    var vm = this;
+    if(vm.newBooking._id) {
       delete vm.newBooking.__v;
-      vm.$http.put("/api/reservetables/"+vm.newBooking._id, vm.newBooking).then(function(res) {
-      });
-    }else{
-      vm.$http.post("/api/reservetables", vm.newBooking).then(function(res) {
-        vm.toaster.pop('success', "Booking Confirm", "You will receive an email for your reservation." , 2000);
-      });
+      vm
+        .$http
+        .put('/api/reservetables/' + vm.newBooking._id, vm.newBooking)
+        .then(function() {});
+    } else {
+      vm
+        .$http
+        .post('/api/reservetables', vm.newBooking)
+        .then(function() {
+          vm
+            .toaster
+            .pop('success', 'Booking Confirm', 'You will receive an email for your reservation.', 2000);
+        });
     }
   }
-} 
+}
 
-
-
-export default angular.module('eatnjoyApp.reserveatable', [uiRouter])
-.config(routing)
-.component('reserveatable', {
+export default angular
+  .module('eatnjoyApp.reserveatable', [uiRouter])
+  .config(routing)
+  .component('reserveatable', {
     template: require('./reserveatable.html'),
     controller: reserveatableComponent,
     controllerAs: 'vm'

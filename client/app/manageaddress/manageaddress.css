@@ -12,7 +12,8 @@
   line-height: 1;
   letter-spacing: -1px;
 }
-.invalid-feedback{
+
+.invalid-feedback {
   color: red;
 }
 
@@ -29,18 +30,16 @@
   margin-left: 15px;
 }
 
-.content{
-	padding-top: 17%;
-	text-align: center;
-    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
-                 0px 8px 13px rgba(0,0,0,0.1),
-                 0px 18px 23px rgba(0,0,0,0.1);
+.content {
+  padding-top: 17%;
+  text-align: center;
+  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1);
 }
 
 hr {
   width: 400px;
   border-top: 1px solid #f8f8f8;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 /* body {
@@ -53,45 +52,46 @@ hr {
 html {
   width: 100%;
   height: 100%;
-
 }
 
 h1 {
-	font-weight: 700;
+  font-weight: 700;
   font-size: 5em;
   color: rgb(110, 47, 47)
 }
-h3{
+
+h3 {
   color: rgb(8, 29, 36)
 }
-.navigation
-{
-    position: absolute; /*or fixed*/
-    right: 20px;
+
+.navigation {
+  position: absolute;
+  /*or fixed*/
+  right: 20px;
 }
-.fooditemname
-{
+
+.fooditemname {
   font-size: 25px
 }
-.fooditemprice
-{
+
+.fooditemprice {
   font-size: 22px
 }
 
-
-
-#sidebar{
-position: fixed;
-width: 200px;
-height: 100%;
-background: #151719
+#sidebar {
+  position: fixed;
+  width: 200px;
+  height: 100%;
+  background: #151719
 }
 
 #sidebar ul li {
-color: rgba(241, 227, 227, 0.9);
-list-style: none;
-padding: 15px 10px;
-border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+  color: rgba(241, 227, 227, 0.9);
+  list-style: none;
+  padding: 15px 10px;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.3);
 }
 
-input.radio {width: auto;}
+input.radio {
+  width: auto;
+}

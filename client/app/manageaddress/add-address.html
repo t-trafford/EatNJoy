@@ -1,85 +1,78 @@
 <form name="form" enctype="multipart/form-data" ng-submit="vm.saveAddress(form,$close)" novalidate>
-  <div class="modal-header">
+  <div class="card">
     <h3 class="modal-title" id="modal-title">Add/Edit Address</h3>
   </div>
   <div class="modal-body" id="modal-body">
 
-    <div class="form-group">
+    <div class="input-field col s12">
+      <input type="text" class="validate" required name="nameI" id="nameI" ng-model="vm.newAddress.name">
       <label for="nameI">Name: </label>
-      <input type="text" class="form-control is-invalid" required name="nameI" ng-model="vm.newAddress.name">
       <div class="invalid-feedback" ng-show="form.$submitted && form.nameI.$invalid">
         <span class="error" ng-show="form.nameI.$error.required">Name is required.</span>
       </div>
     </div>
 
-  
-    <div class="form-group">
+
+    <div class="input-field col s12">
+      <input type="text" class="validate is-invalid" required name="address1" id="address1" ng-model="vm.newAddress.address1">
       <label for="address1">Address Line1: </label>
-      <input type="text" class="form-control is-invalid" required name="address1" ng-model="vm.newAddress.address1">
       <div class="invalid-feedback" ng-show="form.$submitted && form.address1.$invalid">
         <span class="error" ng-show="form.address1.$error.required">Address is required.</span>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="input-field col s12">
       <label for="address2">Address Line2: </label>
-      <input type="text" class="form-control is-invalid" ng-model="vm.newAddress.address2">
+      <input type="text" class="validate is-invalid" ng-model="vm.newAddress.address2">
     </div>
 
-    <div class="form-group">
+    <div class="input-field col s12">
+      <input type="text" class="validate is-invalid" required name="city" ng-model="vm.newAddress.city">
       <label for="city">City: </label>
-      <input type="text" class="form-control is-invalid" required name="city" ng-model="vm.newAddress.city">
       <div class="invalid-feedback" ng-show="form.$submitted && form.city.$invalid">
         <span class="error" ng-show="form.city.$error.required">City is required.</span>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="input-field col s12">
+      <input type="text" class="validate is-invalid" required name="state" ng-model="vm.newAddress.state">
       <label for="state">State: </label>
-      <input type="text" class="form-control is-invalid" required name="state" ng-model="vm.newAddress.state">
       <div class="invalid-feedback" ng-show="form.$submitted && form.state.$invalid">
         <span class="error" ng-show="form.state.$error.required">State is required.</span>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="input-field col s12">
+      <input type="text" class="validate is-invalid" required name="country" ng-model="vm.newAddress.country">
       <label for="country">Country: </label>
-      <input type="text" class="form-control is-invalid" required name="country" ng-model="vm.newAddress.country">
       <div class="invalid-feedback" ng-show="form.$submitted && form.state.$invalid">
         <span class="error" ng-show="form.country.$error.required">Country is required.</span>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="input-field col s12">
       <label for="zip">Zip Code: </label>
-
-      <input type="number"  minlength="5" maxlength="5" name="zip" class="form-control" ng-model="vm.newAddress.zip" required
-          mongoose-error/>
+      <input type="number" minlength="5" maxlength="5" name="zip" class="validate" ng-model="vm.newAddress.zip" required mongoose-error/>
       <div class="invalid-feedback" ng-show="form.$submitted && form.zip.$invalid">
-          <span class="error" ng-show="form.zip.$error.required">Zip Code is required.</span>
-          <span class="error" ng-show="form.zip.$error.minlength">Invalid Zip Code.</span>
-          <span class="error" ng-show="form.zip.$error.maxlength">Invalid Zip Code.</span>
-        
-        </div>
-  </div>
+        <span class="error" ng-show="form.zip.$error.required">Zip Code is required.</span>
+        <span class="error" ng-show="form.zip.$error.minlength">Invalid Zip Code.</span>
+        <span class="error" ng-show="form.zip.$error.maxlength">Invalid Zip Code.</span>
 
-    
-    <div class="form-group">
-      <label for="type">Address Type:</label>
+      </div>
+    </div>
 
-      <select name="type" id="type"  class="form-control" ng-model="vm.newAddress.type" required mongoose-error>
+    <div class="col s12">
+      <label>Address Type:</label>
+      <div class="input-field">
+        <select ng-model="vm.newAddress.type" class="browser-default" required mongoose-error>
+          <option value="" disabled selected>Choose your option</option>
           <option value="Home">Home</option>
           <option value="Company">Company</option>
-      </select>
-     
-      <div class="invalid-feedback" ng-show="form.$submitted && form.type.$invalid">
-          <span class="error" ng-show="form.type.$error.required">Address Type is required. </span>
+        </select>
       </div>
+    </div>
   </div>
 
-
-
-</div>
   <div class="modal-footer">
     <button class="btn btn-primary" type="submit">Save</button>
     <button class="btn btn-warning" type="button" ng-click="$dismiss()">Cancel</button>
