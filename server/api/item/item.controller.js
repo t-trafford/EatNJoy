@@ -12,6 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import Item from './item.model';
+import * as mailer from '../../mailer/mailer';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -66,6 +67,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of Items
 export function index(req, res) {
+
   return Item.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
