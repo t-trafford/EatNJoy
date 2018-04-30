@@ -17,8 +17,8 @@
       <tr class="" ng-repeat="cart in vm.carts">
         <td>{{cart.item.name}}</td>
         <td>{{cart.quantity}} &nbsp;&nbsp;&nbsp;&nbsp;
-          <i class="fa fa-plus" ng-click="" aria-hidden="true"></i> &nbsp;&nbsp;
-          <i class="fa fa-minus" ng-click="" aria-hidden="true"></i>
+          <i class="fa fa-plus" ng-click="vm.updateCarts(cart, 1)" aria-hidden="true"></i> &nbsp;&nbsp;
+          <i class="fa fa-minus" ng-click="vm.updateCarts(cart, -1)" aria-hidden="true"></i>
         </td>
         <td>{{cart.quantity * cart.item.price}}$</td>
         <td>
@@ -27,17 +27,49 @@
           </a>
         </td>
       </tr>
-      <td></td>
+      <tr>
+        <td></td>
       <td></td>
       <td></td>
       <td>
-        <b class="subtotal">Sub total: </b>
+        <b class="subtotal">Sub total: {{vm.calculateTotalPrice(vm.carts)}} </b>
       </td>
+      </tr>
 
 
     </tbody>
   </table>
   <br><br>
-  <button ui-sref-active="active" type="button" ng-click="" class="btn btn-info btn-lg">Proceed To Checkout</button>
+<div>
+  <div class="row">
+    <div class="col s12 m6" ng-repeat="address in vm.addresses">
+      <div class="card" ng-class="{'light-green darken-1': address._id==vm.order.address._id, 'blue-grey darken-1': !(address._id==vm.order.address._id)}">
+        <div class="card-content white-text">
+          <span class="card-title">{{address.name}} ({{address.type}})</span>
+          <p>{{address.address1}}, {{address.address2}}, {{address.city}} {{address.state}} {{address.country}} - {{address.zip}}</p>
+        </div>
+        <div class="card-action">
+          <a href="" ng-click="vm.order.address=address">Choose Address for Order</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <div class="row">
+    <div class="col s12 m6" ng-repeat="c in vm.cards">
+      <div class="card" ng-class="{'light-green darken-1': c._id==vm.order.card._id, 'blue-grey darken-1': !(c._id==vm.order.card._id)}">
+        <div class="card-content white-text">
+          <span class="card-title">{{c.name}} ({{c.cardnumber}})</span>
+        </div>
+        <div class="card-action">
+          <a href="" ng-click="vm.order.card=c">Choose Card for Order</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <button ng-disabled="!vm.order.card || !vm.order.address" ui-sref-active="active" type="button" ng-click="vm.checkout()" class="btn btn-info btn-lg">Proceed To Checkout</button>
 
 </div>

@@ -11,7 +11,7 @@ export class vieworderComponent {
     this.$http = $http;
     this.appConfig = appConfig;
     this.$uibModal = $uibModal;
-    this.cart = {};
+    this.orders = {};
     this.isLoggedIn = Auth.isLoggedInSync;
     this.isAdmin = Auth.isAdminSync;
     this.Auth = Auth;
@@ -21,7 +21,26 @@ export class vieworderComponent {
     $scope.$on("$destroy", function() {
       socket.unsyncUpdates("vieworder");
     });
-    this.getCartItem();
+  }
+  
+  $onInit() {
+    this.getOrders();
+  }
+
+  getOrders(){
+    this.$http.get("/api/orders").then(response => {
+      this.orders = (response.data||[]);
+    //  this.socket.syncUpdates("vieworder", this.orders);
+    });
+  }
+  updateStatus(order, status){
+    if (!order || !status) {
+      return;
+    }
+    order.status=status;
+    this.$http.put("/api/orders/"+order._id, order).then(response => {
+      
+    });
   }
 }
 

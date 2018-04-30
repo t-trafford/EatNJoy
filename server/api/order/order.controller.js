@@ -97,6 +97,7 @@ export function create(req, res) {
 export function upsert(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
+    Reflect.deleteProperty(req.body, '__v');
   }
   return Order.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
 

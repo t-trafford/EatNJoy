@@ -10,11 +10,11 @@
   <br>
   <br>
   
-  <div ng-if="item.active" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="item in vm.items">
+  <div ng-if="item.active" class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="item in vm.items">
     <div class="thumbnail" >
        
         <div ng-if="item.foodImage"  ng-click="vm.addItem(item)">
-          <img height="191" width="388" ng-src="{{vm.appConfig.apiUrl + item.foodImage}}" alt="item image" srcset="">
+          <img height="191" width="378" ng-src="{{vm.appConfig.apiUrl + item.foodImage}}" alt="item image" srcset="">
         </div>
        <b ng-click="vm.addItem(item)"><div class="fooditemname">{{item.name}}</div></b> 
         <div class="fooditemprice">${{item.price}}</div>

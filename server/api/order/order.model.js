@@ -24,11 +24,23 @@ var OrderSchema = new mongoose.Schema({
     // required: true//,
   //  default: Math.floor((Math.random() * 1000000) + 1)
   },
+  address: {
+    type: mongoose.Schema.Types.Mixed,
+    required: true
+  },
+  card: {
+    type: mongoose.Schema.Types.Mixed,
+    required: true
+  },
 
   user:{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   active: {
     type: Boolean,
     default: true
+  },
+  status: {
+    type: String,
+    default: 'Pending'
   }
 });
 
