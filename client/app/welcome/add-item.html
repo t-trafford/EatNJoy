@@ -20,15 +20,7 @@
         ngf-accept="'image/*'" ngf-max-size="20MB" ng-required="!vm.newItem.foodImage">Select Image</div>
 
         <a ng-if="vm.newItem.foodImage" ng-href="{{vm.newItem.foodImage}}" target="_blank">Download Image</a>
-        <!--
-          <div class="btn btn-primary" ngf-select="" ng-model="vm.files" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'"
-          ngf-max-size="20MB" ngf-multiple="false" >Select files...</div>
-          <input name="foodimage" type="file" class="form-control" ng-model="vm.newItem.foodImage" required/>
-        <input name="width" value="50%" style="display: none"/>
-        <input name="widgetId" value="123" style="display: none"/>
-        <button type="submit" class="btn-btn-block btn-primary">Upload Image</button>
-        <button type="button" class="btn btn-primary" ng-click="vm.uploadFiles()">Upload</button>
-      -->
+       
         <br>
         <div class="invalid-feedback" ng-show="form.$submitted && (form.foodImage.$invalid ||  !form.file.$valid)">
             <span class="error" ng-show="form.foodImage.$error.required || form.file.$error.required">Image is required.</span>
@@ -36,14 +28,7 @@
           </div>
       </div>
 
-    <!-- <div class="form-group">
-      <label for="foodItemName">Item Name: </label>
-      <input type="text" class="form-control" name="foodItemName" ng-model="vm.newItem.foodItemName" required>
 
-      <div class="invalid-feedback" ng-show="form.$submitted && form.foodItemName.$invalid">
-        <span class="error" ng-show="form.foodItemName.$error.required">Item Name is required.</span>
-      </div>
-    </div> -->
     <div class="form-group">
       <label for="price">Price: </label>
       <input type="number" class="form-control" name="price" ng-model="vm.newItem.price" required>
@@ -57,9 +42,14 @@
       <textarea name="ingredients" class="form-control" ng-model="vm.newItem.ingredients" rows="4"></textarea>
     </div>
     <div class="form-group">
-      <label for="status">Status: </label>
-      <input type="checkbox" name="status" ng-model="vm.newItem.active"> Is Active
+        <label for="status">Status:</label><br>
+      <label for="status"><input type="checkbox" id="status" ng-model="vm.newItem.active" checked><span>Is Active</span>
+    </label>
     </div>
+    <!-- <label>
+      <input type="checkbox" />
+      <span>Red</span>
+    </label> -->
   </div>
   <div class="modal-footer">
     <button class="btn btn-primary" type="submit">Save</button>

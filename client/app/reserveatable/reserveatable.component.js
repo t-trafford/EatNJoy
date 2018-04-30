@@ -74,7 +74,7 @@ export class reserveatableComponent {
         .then(function() {
           vm
             .toaster
-            .pop('success', 'Booking Confirm', 'You will receive an email for your reservation.', 2000);
+            .pop('success', 'You will receive an email for your reservation.');
         });
     }
   }
