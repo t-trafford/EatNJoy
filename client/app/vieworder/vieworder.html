@@ -1,43 +1,32 @@
-<br>
-<br>
-<div class="container">
-    <table class="highlight">
+<div class="container" ng-if="vm.orders && vm.orders.length">
+  <table class="highlight card centered">
+    <!--Table head-->
+    <thead>
+      <tr class="">
+        <th>Invoice Number</th>
+        <th>Order id</th>
+        <th>Price</th>
+        <th>Order Date</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="" ng-repeat="o in vm.orders">
+        <td>{{o.invoiceNumber}}</td>
+        <td><a href="">{{o.orderId}}</a></td>
+        <td>{{o.price|currency:'$'}}</td>
+        <td>{{o.createdDate}}</td>
+        <td>
+          {{o.status}}
+        </td>
+        <td>
+          <a ng-if="o.status=='Pending'" class="waves-effect waves-light btn  lime darken-1" ng-click="vm.updateStatus(o, 'Inprocess')">Inprocess</a>
+          <a ng-if="o.status=='Inprocess'" class="waves-effect waves-light btn  orange darken-4" ng-click="vm.updateStatus(o, 'Completed')">Complete</a>
+          <a ng-if="o.status=='Completed'" class="waves-effect waves-light btn  green darken-4" ng-click="vm.updateStatus(o, 'Delivered')">Delivered</a>
 
-        <!--Table head-->
-        <thead>
-            <tr class="">
-                <th>Invoice Number</th>
-                <th>Price</th>
-                <th>Status</th>
-                <th></th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="" ng-repeat="o in vm.orders">
-                <td>{{o.invoiceNumber}}</td>
-                <td>{{o.price|currency:'$'}}
-                </td>
-
-                <td>
-                    <!-- <div class="input-field col s12">
-                        <select ng-model="o.status">
-                            <option value="" disabled selected>Change Status</option>
-                            <option value="Inprocess">Inprocess</option>
-                            <option value="Completed">Completed</option>
-                            <option value="Pending">Pending</option>
-                        </select>
-                    </div> -->
-                        {{o.status}}
-                </td>
-                <td>
-                    <a ng-if="o.status=='Pending'" class="waves-effect waves-light btn  lime darken-1" ng-click="vm.updateStatus(o, 'Inprocess')">Inprocess</a>
-                    <a ng-if="o.status=='Inprocess'" class="waves-effect waves-light btn  green darken-4" ng-click="vm.updateStatus(o, 'Completed')">Complete</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <br>
-    <br>
-
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

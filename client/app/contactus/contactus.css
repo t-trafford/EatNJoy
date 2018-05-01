@@ -1,16 +1,28 @@
-.contactus{
-    padding: 210px;
-    margin-left: 210px;
-    font-size: 55px;
-    border: none;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: inherit
+.contactus {
+  /* padding: 210px; */
+  /* margin-left: 210px; */
+  font-size: 55px;
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
 
-  }
+.hmm {
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: justify
+}
 
-  .hmm{
-    font-size: 30px;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: justify
+.head {
+  border-color: #000;
+  border-style: solid;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
 
-  }
+.feat {
+  border-color: #f57f17;
+  border-style: solid;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

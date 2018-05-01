@@ -16,6 +16,10 @@
   color: red;
 }
 
+.thumbnail{
+  height: 310px;
+}
+
 .hero-unit {
   position: relative;
   padding: 30px 15px;

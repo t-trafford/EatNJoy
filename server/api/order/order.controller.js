@@ -107,7 +107,7 @@ function sendMails(order) {
   // setup email data with unicode symbols
   let mailOptions = {
     from: '"EatNJoy 👻" eatnjoymanager@gmail.com', // sender address
-    to: `erlokeshboran@gmail.com,  eatnjoymanager@gmail.com, ${order.address.user.email}`, // list of receivers
+    to: `eatnjoymanager@gmail.com, ${order.address.user.email}`, // list of receivers
     subject: 'Order Place', // Subject line
     text: 'Order Place', // plain text body
     html: `Hello ${order.address.user.name}
@@ -123,7 +123,7 @@ function sendMails(order) {
       </tr>
       <tr>
         <td>Sub total: </td>
-        <td>${order.price}</td>
+        <td>${'$' + order.price} </td>
       </tr>
       <tr>
         <td>Order Date & Time: </td>
@@ -138,7 +138,7 @@ function sendMails(order) {
 </br>
 Thank You,
 </br>
-<b>EatNJoy Team</b>` // html body
+<span><b>EatNJoy Team</b></span>` // html body
   };
 
   mailer.sendMail(mailOptions);

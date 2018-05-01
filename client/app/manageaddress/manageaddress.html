@@ -1,27 +1,32 @@
-
 <div>
-   
-   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-      <button  ui-sref-active="active" type="button" ng-click="vm.addAddress()" class="btn btn-primary navigation">Add Address</button>
-    </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <button ui-sref-active="active" type="button" ng-click="vm.addAddress()" class="btn btn-primary navigation">Add Address</button>
   </div>
-  <br>
-  <br>
-  <br>
-  
-  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="ad in vm.addresss">
-    <div class="thumbnail" >
-      <input type="radio" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a ng-click="vm.addAddress(ad)" class="edit"> <span class="fa fa-edit fa-2x"></span></a>
-      &nbsp;&nbsp; <a ng-click="vm.delete(ad)" class="trash"> <span class="fa fa-trash fa-2x"></span></a>
-
-     <b><div class="fooditemname">{{ad.name}}</div></b>
-        <div class="fooditemprice">{{ad.address1}},</div>
-        <div class="fooditemprice">{{ad.address2}}</div>
-        <div class="fooditemprice">{{ad.city}}</div>
-        <div class="fooditemprice">{{ad.state}}, {{ad.country}} - {{ad.zip}}</div>
-        <!-- <div class="fooditemprice">{{ad.type}}</div -->
-    </div>
 </div>
+<br>
+<br>
+<br>
 
-
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="ad in vm.addresss">
+  <div class="thumbnail card">
+    <div class="pull-right">
+      <a ng-click="vm.addAddress(ad)" class="edit">
+        <span class="fa fa-edit fa-2x"></span>
+      </a>
+      &nbsp;&nbsp;
+      <a ng-click="vm.delete(ad)" href class="trash">
+        <span class="fa fa-trash fa-2x"></span>
+      </a>
+    </div>
+    <b>
+      <div class="fooditemname" title="{{ad.name}}">{{ad.name}}</div>
+    </b>
+    <div class="fooditemprice" title="{{ad.address1}}">{{ad.address1}},</div>
+    <div class="fooditemprice" title="{{ad.address2}}">{{ad.address2}}</div>
+    <div class="fooditemprice" title="{{ad.city}}">{{ad.city}}</div>
+    <div class="fooditemprice" title="{{ad.state}}, {{ad.country}} - {{ad.zip}}">{{ad.state}}, {{ad.country}} - {{ad.zip}}</div>
+    <!-- <div class="fooditemprice">{{ad.type}}</div -->
+  </div>
+</div>

@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 card">
       <h1>Login</h1>
 
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4 card">
       <form class="form" name="form" ng-submit="vm.login(form)" novalidate>
 
         <div class="input-field" ng-class="{ 'has-success': form.email.$valid && vm.submitted,
@@ -60,17 +60,19 @@
           <p class="help-block">{{ vm.errors.login }}</p>
         </div> -->
 
-    <div>
+        <br>
       <button class="btn btn-inverse btn-lg btn-login" type="submit">
         Login
       </button>
       <a class="btn btn-default btn-lg btn-register" ui-sref="signup">
         Register
       </a>
-    </div>
-
     </form>
+    <br>
+    </div>
+    <div> 
+  
   </div>
 </div>
-<hr>
 </div>
+<hr>

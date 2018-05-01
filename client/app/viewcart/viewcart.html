@@ -20,7 +20,7 @@
           <i class="fa fa-plus" ng-click="vm.updateCarts(cart, 1)" aria-hidden="true"></i> &nbsp;&nbsp;
           <i class="fa fa-minus" ng-click="vm.updateCarts(cart, -1)" aria-hidden="true"></i>
         </td>
-        <td>{{cart.quantity * cart.item.price}}$</td>
+        <td>{{cart.quantity * cart.item.price}} $</td>
         <td>
           <a ng-click="vm.deleteCartItem(cart)" class="trash">
             <span class="fa fa-trash fa-2x"></span>
@@ -32,7 +32,7 @@
       <td></td>
       <td></td>
       <td>
-        <b class="subtotal">Sub total: {{vm.calculateTotalPrice(vm.carts)}} </b>
+        <b class="subtotal">Sub total: {{vm.calculateTotalPrice(vm.carts)}} $ </b>
       </td>
       </tr>
 
@@ -70,6 +70,12 @@
   </div>
 </div>
 
-  <button ng-disabled="!vm.order.card || !vm.order.address" ui-sref-active="active" type="button" ng-click="vm.checkout()" class="btn btn-info btn-lg">Proceed To Checkout</button>
+  <button ng-disabled="!vm.order.card || !vm.order.address" ui-sref-active="active" type="button" ng-click="vm.checkout()" class="btn btn-info btn-lg">Place Order</button>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 </div>

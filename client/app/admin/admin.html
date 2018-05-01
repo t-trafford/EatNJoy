@@ -1,39 +1,47 @@
-<div class="container" >
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="container">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
     <button ui-sref-active="active" type="button" ng-click="vm.addEmployee()" class="btn btn-primary navigation">Add Employee</button>
-<br>
-<br>
-<br>
-<table class="highlight">
+    <br>
+    <br>
+    <br>
+    <table class="highlight card centered">
 
-    <!--Table head-->
-    <thead>
+      <!--Table head-->
+      <thead>
         <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Role</th>
-            <th>Edit</th>
-            <th>Delete</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Role</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
-    </thead>
-    <!--Table head-->
+      </thead>
+      <!--Table head-->
 
-    <!--Table body-->
-    <tbody ng-repeat="u in vm.users">
+      <!--Table body-->
+      <tbody ng-repeat="u in vm.users">
         <tr>
-            <td>{{u.name}}</td>
-            <td>{{u.email}}</td>
-            <td>{{u.phone}}</td>
-            <td>{{u.role}}</td>
-            <td><a ng-click="vm.addEmployee(u)" class="edit"> <span class="fa fa-edit fa-2x"></span></a></td>
-          <td><a ng-click="vm.delete(u)" class="trash"> <span class="fa fa-trash fa-2x"></span></a></td>
+          <td data-th="Name">{{u.name}}</td>
+          <td data-th="Email">{{u.email}}</td>
+          <td data-th="Phone">{{u.phone}}</td>
+          <td data-th="Role">{{u.role}}</td>
+          <td data-th="Edit">
+            <a ng-click="vm.addEmployee(u)" class="edit">
+              <span class="fa fa-edit fa-2x"></span>
+            </a>
+          </td>
+          <td data-th="Delete">
+            <a ng-click="vm.delete(u)" class="trash">
+              <span class="fa fa-trash fa-2x"></span>
+            </a>
+          </td>
         </tr>
-    </tbody>
-    <!--Table body-->
+      </tbody>
+      <!--Table body-->
 
-</table>
-<!--Table-->
-</div>
+    </table>
+    <!--Table-->
+  </div>
 </div>

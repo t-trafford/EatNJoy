@@ -14,10 +14,10 @@
     </div>
     <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
-        <li ng-show="$ctrl.isLoggedIn()" ng-repeat="item in $ctrl.menu" ui-sref-active="active">
+        <li  ng-show="($ctrl.validateRoleSync('manager') && $ctrl.isLoggedIn()) || ($ctrl.validateRoleSync('user') && $ctrl.isLoggedIn())" ng-repeat="item in $ctrl.menu" ui-sref-active="active">
             <a ui-sref="{{item.state}}" href="/welcome">{{item.title}}</a>
         </li>
-        <li ng-show="($ctrl.validateRoleSync('manager') && $ctrl.isLoggedIn()) || ($ctrl.validateRoleSync('employee') && $ctrl.isLoggedIn())" ui-sref-active="active"><a ui-sref="vieworder">View Order </a></li>
+        <li ng-show="$ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="vieworder">View Order</a></li>
         <li ng-show="$ctrl.validateRoleSync('manager') && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="admin">Manage Employees </a></li>
         <li ng-show="$ctrl.validateRoleSync('user') && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="manageaddress">Manage Address </a></li>
         <!-- <li ng-show="$ctrl.isAdmin() && $ctrl.isLoggedIn()" ui-sref-active="active"><a ui-sref="">Reserve a Table </a></li> -->

@@ -75,7 +75,12 @@ h3 {
 }
 
 .fooditemprice {
-  font-size: 22px
+  font-size: 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  float: left;
+  width: 100%;
 }
 
 #sidebar {

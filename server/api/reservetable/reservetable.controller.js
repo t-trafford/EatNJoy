@@ -113,8 +113,8 @@ function sendMails(reserv) {
   let mailOptions = {
     from: '"EatNJoy 👻" eatnjoymanager@gmail.com', // sender address
     to: `eatnjoymanager@gmail.com, ${reserv.email}`, // list of receivers
-    subject: 'Order Place', // Subject line
-    text: 'Order Place', // plain text body
+    subject: 'Table Reserved', // Subject line
+    text: 'Table Reserved', // plain text body
     html: `Hello ${reserv.name}
     <p> Thank You for Choosing EatNJoy. Your Table is booked with following details. We will Look Forward to Provide you quality food & best service.</p>
     <table>
@@ -123,16 +123,20 @@ function sendMails(reserv) {
         <td>${reserv.name}</td>
       </tr>
       <tr>
+      <td>For Person: </td>
+      <td>${reserv.person}</td>
+    </tr>
+      <tr>
         <td>Date & Time: </td>
         <td>${reserv.time}</td>
       </tr>
-    </table>
+  </table>
 </br>
 </br>
 <div>
 Thank You,
 </br>
-<b>EatNJoy Team</b>
+<span><b>EatNJoy Team</b></span>
 </div>` // html body
   };
 
