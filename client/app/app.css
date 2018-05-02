@@ -43,10 +43,11 @@
 }
 
 body {
-  background: url('/assets/images/bgimg.jpg');
-  background-size: cover;
+  background: url('/assets/images/type.png');
+  /* background-size: cover;
   background-position: center; 
-  background-attachment: fixed;
+  background-attachment: fixed; */
+  background-repeat: repeat;
 }
 
 .modal-dialog {
@@ -59,6 +60,9 @@ body {
 @import 'admin/admin.css';
 @import 'contactus/contactus.css';
 @import 'main/main.css';
+@import 'account/signup/signup.css';
+@import 'account/login/login.css';
+@import 'account/settings/settings.css';
 @import 'manageaddress/manageaddress.css';
 @import 'managecard/managecard.css';
 @import 'reserveatable/reserveatable.css';

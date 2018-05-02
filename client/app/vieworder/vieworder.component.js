@@ -35,6 +35,7 @@ export class vieworderComponent {
   getOrders() {
     this.$http.get('/api/orders').then(response => {
       this.orders = (response.data || []);
+      console.log(this.orders);
     //  this.socket.syncUpdates("vieworder", this.orders);
     });
   }

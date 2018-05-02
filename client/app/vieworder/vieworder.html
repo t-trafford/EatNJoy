@@ -2,7 +2,7 @@
   <table class="highlight card centered">
     <!--Table head-->
     <thead>
-      <tr class="">
+      <tr class="blue-grey lighten-3">
         <th>Invoice Number</th>
         <th>Order id</th>
         <th>Price</th>
@@ -12,21 +12,34 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="" ng-repeat="o in vm.orders">
+      <tr class="brown lighten-4" ng-repeat="o in vm.orders">
         <td>{{o.invoiceNumber}}</td>
-        <td><a href="">{{o.orderId}}</a></td>
+        <td>
+          <a class="waves-effect waves-light btn modal-trigger orderid" href="#modal1">{{o.orderId}}</a>
+        </td>
         <td>{{o.price|currency:'$'}}</td>
         <td>{{o.createdDate}}</td>
-        <td>
+        <td class="status">
           {{o.status}}
         </td>
-        <td>
-          <a ng-if="o.status=='Pending'" class="waves-effect waves-light btn  lime darken-1" ng-click="vm.updateStatus(o, 'Inprocess')">Inprocess</a>
-          <a ng-if="o.status=='Inprocess'" class="waves-effect waves-light btn  orange darken-4" ng-click="vm.updateStatus(o, 'Completed')">Complete</a>
-          <a ng-if="o.status=='Completed'" class="waves-effect waves-light btn  green darken-4" ng-click="vm.updateStatus(o, 'Delivered')">Delivered</a>
-
+        <td ng-if="vm.validateRoleSync('manager') || vm.validateRoleSync('employee') || vm.validateRoleSync('driver')">
+          <a ng-if="o.status=='Pending' && (vm.validateRoleSync('manager') || vm.validateRoleSync('employee'))" class="waves-effect waves-light btn  lime darken-1"
+            ng-click="vm.updateStatus(o, 'Inprocess')">Inprocess</a>
+          <a ng-if="o.status=='Inprocess' && (vm.validateRoleSync('manager') || vm.validateRoleSync('employee'))" class="waves-effect waves-light btn  orange darken-4"
+            ng-click="vm.updateStatus(o, 'Completed')">Complete</a>
+          <a ng-if="o.status=='Completed' && (vm.validateRoleSync('manager') || vm.validateRoleSync('driver'))" class="waves-effect waves-light btn  green darken-4"
+            ng-click="vm.updateStatus(o, 'Delivered')">Delivered</a>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Modal Header</h4>
+    <p>A bunch of text</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
 </div>

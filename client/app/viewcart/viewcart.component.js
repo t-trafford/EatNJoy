@@ -68,8 +68,8 @@ export class viewcartComponent {
 
   calculateTotalPrice(carts){
     return (carts||[]).reduce((c,n)=>{
-      return c+(parseInt(n.quantity)*parseInt(n.item.price));
-    },0);
+      return c+(parseFloat(n.quantity)*parseFloat(n.item.price));
+    },0).toFixed(2);
   }
 
   updateCarts(cart, inc){

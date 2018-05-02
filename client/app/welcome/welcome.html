@@ -7,9 +7,9 @@
 <br>
 <br>
 <div ng-if="item.active" class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="item in vm.items">
-  <div class="thumbnail card">
+  <div class="thumbnail card  brown lighten-4">
     <div ng-if="item.foodImage" ng-click="vm.addItem(item)">
-      <img height="191" width="100%" ng-src="{{vm.appConfig.apiUrl + item.foodImage}}" alt="item image" srcset="">
+      <img height="177" width="100%" ng-src="{{vm.appConfig.apiUrl + item.foodImage}}" alt="item image" srcset="">
     </div>
     <b ng-click="vm.addItem(item)">
       <div class="fooditemname">{{item.name}}</div>
@@ -20,6 +20,7 @@
     <a href="" ng-show="!vm.isAdmin()" ng-click="vm.addToCart(item)" class="btn btn-info btn-md">
       <span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart
     </a>
+    <br>
     <!-- <div>{{item.active?'Active':'Inactive'}}</div> -->
   </div>
 </div>

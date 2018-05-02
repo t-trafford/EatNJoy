@@ -27,8 +27,7 @@
 }
 
 .content{
-  padding-top: 12%;
-	text-align: center;
+  text-align: center;
     text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
                  0px 8px 13px rgba(0,0,0,0.1),
                  0px 18px 23px rgba(0,0,0,0.1);
@@ -52,14 +51,13 @@ html {
   height: 100%;
  
 }
-
-h1 {
+.kida{
   font-weight: 700;
-  text-align: center
-  font-size 5em;
-  color: rgb(110, 47, 47)
+  font-size: 110px;
+  text-align: center;
+  color: rgb(175, 84, 84)
 }
-h3{
-  color: rgb(8, 29, 36);
+h4{
+  color: rgb(109, 177, 199);
   text-align: center
 }

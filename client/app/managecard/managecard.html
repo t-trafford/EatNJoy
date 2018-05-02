@@ -11,16 +11,23 @@
   <br>
   <br>
   
-  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" ng-repeat="card in vm.cards">
-    <div class="thumbnail" >
-      <input type="radio" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a ng-click="vm.addCard(card)"  class="edit"> <span class="fa fa-edit fa-2x"></span></a>
-      &nbsp;&nbsp; <a ng-click="vm.delete(card)" class="trash"> <span class="fa fa-trash fa-2x"></span></a>
-
-    <b><div class="kida">{{card.name}}</div></b>
-        <div class="kida">{{card.cardnumber}}</div>
-        <div class="kida">{{card.expmon}}/{{card.expyear}}</div>
-        <div class="kida">{{card.cvv}}</div>
+  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" ng-repeat="card in vm.cards">
+    <div class="brown lighten-4 thumbnail card " >
+      <div class="pull-right">
+        <a ng-click="vm.addCard(card)" class="edit">
+          <span class="fa fa-edit fa-2x"></span>
+        </a>
+        &nbsp;&nbsp;
+        <a ng-click="vm.delete(card)" href class="trash">
+          <span class="fa fa-trash fa-2x"></span>
+        </a>
+      </div>
+     <b><div class="tida">{{card.name}}</div></b>
+        <div class="tida">{{card.cardnumber}}</div>
+        <div class="tida">{{card.expmon}}/{{card.expyear}}</div>
+        <div class="tida">{{card.cvv}}</div>
     </div>
 </div>
+
 
 

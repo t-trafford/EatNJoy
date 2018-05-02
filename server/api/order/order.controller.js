@@ -10,16 +10,19 @@
 
 'use strict';
 
-import { applyPatch } from 'fast-json-patch';
+import {applyPatch} from 'fast-json-patch';
 import Order from './order.model';
 import mongoose from 'mongoose';
 import * as mailer from '../../mailer/mailer';
+import { Math } from 'core-js';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function (entity) {
     if (entity) {
-      return res.status(statusCode).json(entity);
+      return res
+        .status(statusCode)
+        .json(entity);
     }
     return null;
   };
@@ -28,7 +31,9 @@ function respondWithResult(res, statusCode) {
 function patchUpdates(patches) {
   return function (entity) {
     try {
-      applyPatch(entity, patches, /*validate*/ true);
+      applyPatch(entity, patches,
+      /*validate*/
+      true);
     } catch (err) {
       return Promise.reject(err);
     }
@@ -40,7 +45,8 @@ function patchUpdates(patches) {
 function removeEntity(res) {
   return function (entity) {
     if (entity) {
-      return entity.remove()
+      return entity
+        .remove()
         .then(() => res.status(204).end());
     }
   };
@@ -49,7 +55,9 @@ function removeEntity(res) {
 function handleEntityNotFound(res) {
   return function (entity) {
     if (!entity) {
-      res.status(404).end();
+      res
+        .status(404)
+        .end();
       return null;
     }
     return entity;
@@ -59,28 +67,37 @@ function handleEntityNotFound(res) {
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function (err) {
-    res.status(statusCode).send(err);
+    res
+      .status(statusCode)
+      .send(err);
   };
 }
 
 // Gets a list of Orders
 export function index(req, res) {
   var query = {};
-  if (typeof req.user['_id'] == 'string') {
-    query['user'] = mongoose.Types.ObjectId(req.user['_id']);
-  } else if (typeof req.user['_id'] == 'object') {
-    query['user'] = req.user['_id'];
+  if (req.user.role != 'manager' && req.user.role != 'employee' && req.user.role != 'driver') {
+    if (typeof req.user['_id'] == 'string') {
+      query['user'] = mongoose
+        .Types
+        .ObjectId(req.user['_id']);
+    } else if (typeof req.user['_id'] == 'object') {
+      query['user'] = req.user['_id'];
+    }
   }
-  return Order.find(query)
-    .populate('user', 'email name phone').exec()
-
+  return Order
+    .find(query)
+    .populate('user', 'email name phone')
+    .exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
 // Gets a single Order from the DB
 export function show(req, res) {
-  return Order.findById(req.params.id).exec()
+  return Order
+    .findById(req.params.id)
+    .exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -89,14 +106,15 @@ export function show(req, res) {
 // Creates a new Order in the DB
 export function create(req, res) {
   req.body.user = req.user;
-  return Order.create(req.body)
-    .then(resp=>{
+  return Order
+    .create(req.body)
+    .then(resp => {
       try {
         sendMails(resp);
-      } catch (error) {
-        
-      }
-      return res.status(201).json(resp);
+      } catch (error) {}
+      return res
+        .status(201)
+        .json(resp);
     }
     //  respondWithResult(res, 201)
     )
@@ -110,20 +128,29 @@ function sendMails(order) {
     to: `eatnjoymanager@gmail.com, ${order.address.user.email}`, // list of receivers
     subject: 'Order Place', // Subject line
     text: 'Order Place', // plain text body
-    html: `Hello ${order.address.user.name}
+    html: `Hello ${order
+      .address
+      .user
+      .name}
     <p>Thank You for Choosing EatNJoy. Your Order is Received with following details. We will Look Forward to Provide you quality food & best service.</p>
     <table>
       <tr>
         <td>Name: </td>
-        <td>${order.address.user.name}</td>
+        <td>${order
+      .address
+      .user
+      .name}</td>
       </tr>
       <tr>
         <td>Food Item: </td>
-        <td>${(order.item||[]).map(s=>{return '('+parseInt(s.quantity)+') '+ s.item.name + ' - $'+(parseInt(s.price)*parseInt(s.quantity));})}</td>
+        <td> ${ (order.item || [])
+      .map(s => {
+        return '(' + parseInt(s.quantity) + ') ' + s.item.name + ' - $' + ((parseFloat(s.price)) * parseFloat(s.quantity)).toFixed(2);
+      })}</td>
       </tr>
       <tr>
         <td>Sub total: </td>
-        <td>${'$' + order.price} </td>
+        <td>${ '$' + order.price} </td>
       </tr>
       <tr>
         <td>Order Date & Time: </td>
@@ -139,40 +166,49 @@ function sendMails(order) {
 Thank You,
 </br>
 <span><b>EatNJoy Team</b></span>` // html body
-  };
+      };
 
-  mailer.sendMail(mailOptions);
-  
-}
+      mailer.sendMail(mailOptions);}
 
-// Upserts the given Order in the DB at the specified ID
-export function upsert(req, res) {
-  if (req.body._id) {
-    Reflect.deleteProperty(req.body, '_id');
-    Reflect.deleteProperty(req.body, '__v');
-  }
-  return Order.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true }).exec()
+    // Upserts the given Order in the DB at the specified ID
+    export function upsert(req, res) {
+      if (req.body._id) {
+        Reflect.deleteProperty(req.body, '_id');
+        Reflect.deleteProperty(req.body, '__v');
+      }
+      return Order.findOneAndUpdate({
+        _id: req.params.id
+      }, req.body, {
+          new: true,
+          upsert: true,
+          setDefaultsOnInsert: true,
+          runValidators: true
+        })
+        .exec()
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+    }
 
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
+    // Updates an existing Order in the DB
+    export function patch(req, res) {
+      if (req.body._id) {
+        Reflect.deleteProperty(req.body, '_id');
+      }
+      return Order
+        .findById(req.params.id)
+        .exec()
+        .then(handleEntityNotFound(res))
+        .then(patchUpdates(req.body))
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+    }
 
-// Updates an existing Order in the DB
-export function patch(req, res) {
-  if (req.body._id) {
-    Reflect.deleteProperty(req.body, '_id');
-  }
-  return Order.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(patchUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
-
-// Deletes a Order from the DB
-export function destroy(req, res) {
-  return Order.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
-}
+    // Deletes a Order from the DB
+    export function destroy(req, res) {
+      return Order
+        .findById(req.params.id)
+        .exec()
+        .then(handleEntityNotFound(res))
+        .then(removeEntity(res))
+        .catch(handleError(res));
+    }

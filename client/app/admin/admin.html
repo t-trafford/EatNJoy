@@ -6,10 +6,9 @@
     <br>
     <br>
     <table class="highlight card centered">
-
       <!--Table head-->
       <thead>
-        <tr>
+        <tr class="blue-grey lighten-3">
           <th>Name</th>
           <th>Email</th>
           <th>Phone</th>
@@ -22,14 +21,14 @@
 
       <!--Table body-->
       <tbody ng-repeat="u in vm.users">
-        <tr>
-          <td data-th="Name">{{u.name}}</td>
-          <td data-th="Email">{{u.email}}</td>
+        <tr class="brown lighten-4 tabledata">
+          <td data-th="Name"><b>{{u.name}}</b></td>
+          <td data-th="Email"><b><a class="link">{{u.email}}</a></b></td>
           <td data-th="Phone">{{u.phone}}</td>
           <td data-th="Role">{{u.role}}</td>
           <td data-th="Edit">
             <a ng-click="vm.addEmployee(u)" class="edit">
-              <span class="fa fa-edit fa-2x"></span>
+              <span class="fa fa-edit fa-2x edit"></span>
             </a>
           </td>
           <td data-th="Delete">

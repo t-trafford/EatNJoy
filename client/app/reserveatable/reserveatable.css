@@ -4,3 +4,9 @@
 .reservetabe2{
     font-size: 20px;
 }
+.title {
+    font-weight: 700;
+    font-size: 90px;
+    text-align: center;
+    color: rgb(175, 84, 84)
+  }

@@ -1,24 +1,24 @@
 <br>
 <br>
 <div class="container">
-  <table class="highlight">
+  <table class="highlight card centered">
 
     <!--Table head-->
     <thead>
-      <tr class="">
+      <tr class="brown lighten-3">
         <th>Item</th>
         <th>Quantity</th>
         <th>Price</th>
-        <th></th>
+        <th>Remove</th>
 
       </tr>
     </thead>
-    <tbody>
-      <tr class="" ng-repeat="cart in vm.carts">
-        <td>{{cart.item.name}}</td>
-        <td>{{cart.quantity}} &nbsp;&nbsp;&nbsp;&nbsp;
-          <i class="fa fa-plus" ng-click="vm.updateCarts(cart, 1)" aria-hidden="true"></i> &nbsp;&nbsp;
-          <i class="fa fa-minus" ng-click="vm.updateCarts(cart, -1)" aria-hidden="true"></i>
+    <tbody class="cyan lighten-5">
+      <tr ng-repeat="cart in vm.carts">
+        <td><b class="item">{{cart.item.name}}</b></td>
+        <td><span class="item">{{cart.quantity}}</span>  &nbsp;&nbsp;&nbsp;&nbsp;
+          <i class="fa fa-plus-square" style="font-size:28px;color:black" ng-click="vm.updateCarts(cart, 1)" aria-hidden="true"></i>&nbsp;
+          <i class="fa fa-minus-square" style="font-size:28px;color:black" ng-click="vm.updateCarts(cart, -1)" aria-hidden="true"></i>
         </td>
         <td>{{cart.quantity * cart.item.price}} $</td>
         <td>
@@ -42,10 +42,10 @@
   <br><br>
 <div>
   <div class="row">
-    <div class="col s12 m6" ng-repeat="address in vm.addresses">
+    <div class="col l4 s12 m6" ng-repeat="address in vm.addresses">
       <div class="card" ng-class="{'light-green darken-1': address._id==vm.order.address._id, 'blue-grey darken-1': !(address._id==vm.order.address._id)}">
         <div class="card-content white-text">
-          <span class="card-title">{{address.name}} ({{address.type}})</span>
+          <span class="card-title">{{address.name}} ({{address.type}}) &nbsp;&nbsp; <i class="fa fa-address-card"></i></span> 
           <p>{{address.address1}}, {{address.address2}}, {{address.city}} {{address.state}} {{address.country}} - {{address.zip}}</p>
         </div>
         <div class="card-action">
@@ -57,10 +57,12 @@
 </div>
 <div>
   <div class="row">
-    <div class="col s12 m6" ng-repeat="c in vm.cards">
+    <div class="col l3 s12 m6" ng-repeat="c in vm.cards">
       <div class="card" ng-class="{'light-green darken-1': c._id==vm.order.card._id, 'blue-grey darken-1': !(c._id==vm.order.card._id)}">
         <div class="card-content white-text">
-          <span class="card-title">{{c.name}} ({{c.cardnumber}})</span>
+          <span class="card-title">{{c.name}} &nbsp;&nbsp;  <i class="fa fa-credit-card" style="font-size:36px"></i>          </span>
+          <span class="card-title"> ({{c.cardnumber}})</span>
+
         </div>
         <div class="card-action">
           <a href="" ng-click="vm.order.card=c">Choose Card for Order</a>

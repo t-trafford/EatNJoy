@@ -18,6 +18,8 @@ export default class LoginController {
   /*@ngInject*/
   constructor(Auth, $state) {
     this.Auth = Auth;
+    this.isEmployee = Auth.isEmployeeSync;
+    this.isDriver = Auth.isDriverSync;
     this.$state = $state;
   }
 
@@ -33,7 +35,11 @@ export default class LoginController {
       })
         .then(() => {
           // Logged in, redirect to home
-          this.$state.go('welcome');
+          if(this.isDriver || this.isEmployee) {
+            this.$state.go('vieworder');            
+          } else {
+            this.$state.go('welcome');
+          }
         })
         .catch(err => {
           // this.errors.login = err.message;

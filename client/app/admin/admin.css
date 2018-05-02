@@ -1,5 +1,6 @@
 .trash { color:rgb(209, 91, 71); }
-
+.edit { color: steelblue;}
+.link { color:rgb(53, 66, 182); }
 .user-list li {
 	display: flex;
 	border: none;
@@ -18,3 +19,7 @@
 	text-decoration: none;
 }
 
+thead{
+    font-weight: bolder;
+    font-size: 30px;
+}
