@@ -1,16 +1,16 @@
   'use strict';
 
-  import angular from 'angular';
+  // import angular from 'angular';
 
 
-export default class LoginController {
+  export default class LoginController {
   user = {
     name: '',
     email: '',
     password: ''
   };
   errors = {
-     login: undefined
+    login: undefined
   };
   submitted = false;
 
@@ -20,13 +20,15 @@ export default class LoginController {
     this.Auth = Auth;
     this.isEmployee = Auth.isEmployeeSync;
     this.isDriver = Auth.isDriverSync;
+    this.isCustomer = Auth.isCustomerSync;
+    this.isAdmin = Auth.isAdminSync;
     this.$state = $state;
   }
 
   login(form) {
     this.submitted = true;
 
-    if(form.$valid) 
+    if(form.$valid)
     {
       this.invalidlogin = false;
       this.Auth.login({
@@ -35,10 +37,10 @@ export default class LoginController {
       })
         .then(() => {
           // Logged in, redirect to home
-          if(this.isDriver || this.isEmployee) {
-            this.$state.go('vieworder');            
-          } else {
+          if(this.isCustomer() || this.isAdmin()) {
             this.$state.go('welcome');
+          } else {
+            this.$state.go('vieworder');
           }
         })
         .catch(err => {

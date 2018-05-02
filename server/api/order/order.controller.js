@@ -161,10 +161,10 @@ function sendMails(order) {
         <td>${order.address.address1}, ${order.address.address2}, ${order.address.city}, ${order.address.state}, ${order.address.country}-${order.address.zip}</td>
       </tr>
     </table>
-</br>
-</br>
+<br/>
+<br/>
 Thank You,
-</br>
+<br/>
 <span><b>EatNJoy Team</b></span>` // html body
       };
 

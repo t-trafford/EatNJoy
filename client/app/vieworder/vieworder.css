@@ -10,7 +10,7 @@
 }
 thead{
     font-weight: bolder;
-    font-size: 30px;
+    font-size: 20px;
 }
 .status{
     font-weight: 600;
@@ -18,7 +18,7 @@ thead{
 }
 
 .orderid{
-    font-size: 24px;
+    font-size: 20px;
 }
 tbody{
     font-size: 18px;

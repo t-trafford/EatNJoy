@@ -131,11 +131,11 @@ function sendMails(reserv) {
         <td>${reserv.time}</td>
       </tr>
   </table>
-</br>
-</br>
+<br/>
+<br/>
 <div>
 Thank You,
-</br>
+<br/>
 <span><b>EatNJoy Team</b></span>
 </div>` // html body
   };

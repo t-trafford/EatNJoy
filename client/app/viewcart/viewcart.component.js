@@ -4,9 +4,9 @@ import routing from "./viewcart.routes";
 'use strict';
 
 export class viewcartComponent {
-    /*@ngInject*/
+  /*@ngInject*/
   constructor($http, toaster, $scope, socket, $uibModal, Auth, appConfig, $state) {
-    
+
     // Use the User $resource to fetch all users
     this.$http = $http;
     this.$state = $state;
@@ -20,12 +20,10 @@ export class viewcartComponent {
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.toaster = toaster;
 
-    $scope.$on("$destroy", function() {
+    $scope.$on("$destroy", function () {
       socket.unsyncUpdates("cart");
     });
     this.getCartItem();
-
-    
 
   }
 
@@ -36,88 +34,120 @@ export class viewcartComponent {
   }
   // cart = {};
 
-  getCartItem(){
+  getCartItem() {
     // this.users = this.User.getEmployee();
 
-    this.$http.get("/api/carts").then(response => {
-      this.carts = (response.data||[]);
-    //  this.socket.syncUpdates("cart", this.carts);
-    });
-  }
-  
-  getAddress(){
-    this.$http.get("/api/address").then(response => {
-      this.addresses = (response.data||[]);
-    });
+    this
+      .$http
+      .get("/api/carts")
+      .then(response => {
+        this.carts = (response.data || []);
+        //  this.socket.syncUpdates("cart", this.carts);
+      });
   }
 
-  getCards(){
-    this.$http.get("/api/cards").then(response => {
-      this.cards = (response.data||[]);
-    });
+  getAddress() {
+    this
+      .$http
+      .get("/api/address")
+      .then(response => {
+        this.addresses = (response.data || []);
+      });
   }
-  
-  getCartItem(){
+
+  getCards() {
+    this
+      .$http
+      .get("/api/cards")
+      .then(response => {
+        this.cards = (response.data || []);
+      });
+  }
+
+  getCartItem() {
     // this.users = this.User.getEmployee();
 
-    this.$http.get("/api/carts").then(response => {
-      this.carts = (response.data||[]);
-    //  this.socket.syncUpdates("cart", this.carts);
-    });
+    this
+      .$http
+      .get("/api/carts")
+      .then(response => {
+        this.carts = (response.data || []);
+        //  this.socket.syncUpdates("cart", this.carts);
+      });
   }
 
-  calculateTotalPrice(carts){
-    return (carts||[]).reduce((c,n)=>{
-      return c+(parseFloat(n.quantity)*parseFloat(n.item.price));
-    },0).toFixed(2);
+  calculateTotalPrice(carts) {
+    return (carts || []).reduce((c, n) => {
+      return c + (parseFloat(n.quantity) * parseFloat(n.item.price));
+    }, 0).toFixed(2);
   }
 
-  updateCarts(cart, inc){
-    if (!cart || !cart._id ) {
+  updateCarts(cart, inc) {
+    if (!cart || !cart._id) {
       return;
     }
-    if (inc==-1 && cart.quantity<=1) {
+    if (inc == -1 && cart.quantity <= 1) {
       return;
     }
-    cart.quantity=cart.quantity+inc;
-    this.$http.put("/api/carts/"+cart._id, cart).then(response => {
-      
-    });
+    cart.quantity = cart.quantity + inc;
+    this
+      .$http
+      .put("/api/carts/" + cart._id, cart)
+      .then(response => {});
   }
 
-  checkout(){
+  checkout() {
     this.order.item = this.carts;
+    this
+      .toaster
+      .pop('success', "Order", "Order placed successfully", 2000);
     this.order.price = this.calculateTotalPrice(this.carts);
     if (this.order && this.order.card && this.order.address && this.order.item && this.order.item.length) {
-      this.$http.post("/api/orders/", this.order).then(response => {
-        this.$state.go('vieworder');
-      });
+      this
+        .$http
+        .post("/api/orders/", this.order)
+        .then(response => {
+          this
+            .$state
+            .go('vieworder');
+        });
     }
   }
 
-  deleteCartItem(cart){
-    this.$http.delete("/api/carts/" + cart._id).then(response => {
-      
-      this.carts.splice(this.carts.indexOf(cart), 1);
-      this.toaster.pop('error', "Item", "Removed From Cart.", 2000);
-      this.$http.get("/api/carts").then(response => {
-        this.carts = (response.data||[]).map(itm=>{
-          itm.expdate = new Date(itm.expdate); 
-          return itm;
-        });
-        this.socket.syncUpdates("cart", this.carts);
+  deleteCartItem(cart) {
+    this
+      .$http
+      .delete("/api/carts/" + cart._id)
+      .then(response => {
+
+        this
+          .carts
+          .splice(this.carts.indexOf(cart), 1);
+        this
+          .toaster
+          .pop('error', "Item", "Removed From Cart.", 2000);
+        this
+          .$http
+          .get("/api/carts")
+          .then(response => {
+            this.carts = (response.data || []).map(itm => {
+              itm.expdate = new Date(itm.expdate);
+              return itm;
+            });
+            this
+              .socket
+              .syncUpdates("cart", this.carts);
+          });
+
       });
-  
-    });
   }
-
-
 
 }
 
-export default angular.module('eatnjoyApp.viewcart', [uiRouter])
-.config(routing)
-.component('viewcart', {
+export default angular
+  .module('eatnjoyApp.viewcart', [uiRouter])
+  .config(routing)
+  .component('viewcart', {
     template: require('./viewcart.html'),
     controller: viewcartComponent,
     controllerAs: 'vm'

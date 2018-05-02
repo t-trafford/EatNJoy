@@ -18,7 +18,7 @@
           <a class="waves-effect waves-light btn modal-trigger orderid" href="#modal1">{{o.orderId}}</a>
         </td>
         <td>{{o.price|currency:'$'}}</td>
-        <td>{{o.createdDate}}</td>
+        <td>{{o.createdDate | date : 'MM/dd/yyyy hh:mm a'}}</td>
         <td class="status">
           {{o.status}}
         </td>

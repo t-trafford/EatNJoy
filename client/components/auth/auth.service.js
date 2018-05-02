@@ -243,7 +243,6 @@ export function AuthService($location, $http, $cookies, $q, appConfig, Util, Use
     },
     isCustomerSync() {
       // eslint-disable-next-line no-sync
-      debugger
       return Auth.hasRoleSync('user');
       
     },
