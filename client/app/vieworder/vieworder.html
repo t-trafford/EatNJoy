@@ -15,13 +15,14 @@
       <tr class="brown lighten-4" ng-repeat="o in vm.orders">
         <td>{{o.invoiceNumber}}</td>
         <td>
-          <a class="waves-effect waves-light btn modal-trigger orderid" href="#modal1">{{o.orderId}}</a>
+          <a class="waves-effect waves-light btn modal-trigger orderid" href ng-click="vm.orderDetail(o)">{{o.orderId}}</a>
         </td>
         <td>{{o.price|currency:'$'}}</td>
         <td>{{o.createdDate | date : 'MM/dd/yyyy hh:mm a'}}</td>
         <td class="status">
           {{o.status}}
         </td>
+
         <td ng-if="vm.validateRoleSync('manager') || vm.validateRoleSync('employee') || vm.validateRoleSync('driver')">
           <a ng-if="o.status=='Pending' && (vm.validateRoleSync('manager') || vm.validateRoleSync('employee'))" class="waves-effect waves-light btn  lime darken-1"
             ng-click="vm.updateStatus(o, 'Inprocess')">Inprocess</a>
@@ -33,13 +34,4 @@
       </tr>
     </tbody>
   </table>
-</div>
-<div id="modal1" class="modal">
-  <div class="modal-content">
-    <h4>Modal Header</h4>
-    <p>A bunch of text</p>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-  </div>
 </div>

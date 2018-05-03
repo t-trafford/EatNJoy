@@ -35,12 +35,13 @@
         email: this.user.email,
         password: this.user.password
       })
-        .then(() => {
+        .then((data) => {
           // Logged in, redirect to home
-          if(this.isCustomer() || this.isAdmin()) {
-            this.$state.go('welcome');
-          } else {
+          console.log(data.role)
+          if(data.role == 'driver' || data.role == 'employee' || data.role == 'manager') {
             this.$state.go('vieworder');
+          } else {
+            this.$state.go('welcome');
           }
         })
         .catch(err => {

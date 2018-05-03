@@ -145,7 +145,7 @@ function sendMails(order) {
         <td>Food Item: </td>
         <td> ${ (order.item || [])
       .map(s => {
-        return '(' + parseInt(s.quantity) + ') ' + s.item.name + ' - $' + ((parseFloat(s.price)) * parseFloat(s.quantity)).toFixed(2);
+        return '(' + parseInt(s.quantity) + ') ' + s.item.name + ' - $' + ((parseFloat(s.item.price)) * parseFloat(s.quantity)).toFixed(2);
       })}</td>
       </tr>
       <tr>

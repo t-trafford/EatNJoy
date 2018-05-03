@@ -1,26 +1,32 @@
-.checkout{
-    size: 200px,
-
-}
-.bg{
-    background-color: #E8E8E8;
-    margin: 30px;
-    border: solid black 1px;
-    border-spacing: 10px;
-}
-thead{
-    font-weight: bolder;
-    font-size: 20px;
-}
-.status{
-    font-weight: 600;
-
+.checkout {
+  size: 200px,
 }
 
-.orderid{
-    font-size: 20px;
+.bg {
+  background-color: #E8E8E8;
+  margin: 30px;
+  border: solid black 1px;
+  border-spacing: 10px;
 }
-tbody{
-    font-size: 18px;
 
+thead {
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.status {
+  font-weight: 600;
+}
+
+.orderid {
+  font-size: 20px;
+}
+
+tbody {
+  font-size: 18px;
+}
+
+.modal-override {
+  background-color: transparent !important;
+  box-shadow: none;
 }

@@ -1,0 +1,13 @@
+<form name="form" enctype="multipart/form-data" novalidate>
+  <div class="card">
+    <h3 class="modal-title" id="modal-title">Order Detail</h3>
+  </div>
+  <div class="modal-body card" id="modal-body" ng-repeat="detail in vm.detail.item">
+    <b>Item Name:</b> {{detail.item.name}}
+    <br> <b> Ingredients:</b> {{detail.item.ingredients}}
+    <br> <b>Quantity:</b> {{detail.quantity}}
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="$dismiss()">Cancel</button>
+  </div>
+</form>

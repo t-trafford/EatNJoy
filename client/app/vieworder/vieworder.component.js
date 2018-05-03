@@ -23,7 +23,7 @@ export class vieworderComponent {
     this.isDriver = Auth.isDriverSync;
     this.validateRoleSync = Auth.validateRoleSync;
 
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', function () {
       socket.unsyncUpdates('vieworder');
     });
   }
@@ -33,28 +33,59 @@ export class vieworderComponent {
   }
 
   getOrders() {
-    this.$http.get('/api/orders').then(response => {
-      this.orders = (response.data || []);
-      console.log(this.orders);
-    //  this.socket.syncUpdates("vieworder", this.orders);
-    });
+    this
+      .$http
+      .get('/api/orders')
+      .then(response => {
+        this.orders = (response.data || []);
+        console.log(this.orders);
+        //  this.socket.syncUpdates("vieworder", this.orders);
+      });
   }
   updateStatus(order, status) {
-    if(!order || !status) {
+    if (!order || !status) {
       return;
     }
     order.status = status;
-    this.$http.put('/api/orders/' + order._id, order).then(response => {
-      console.log(response);
-    });
+    this
+      .$http
+      .put('/api/orders/' + order._id, order)
+      .then(response => {
+        console.log(response);
+      });
+  }
+
+  orderDetail(detail) {
+    var vm = this;
+    var modalInstance = this
+      .$uibModal
+      .open({
+        template: require('./detaild-order.html'),
+        windowClass: 'modal-override',
+        controller: 'orderDetailCtrl',
+        controllerAs: 'vm',
+        resolve: {
+          detail() {
+            return detail;
+          }
+        }
+      });
   }
 }
 
-export default angular.module('eatnjoyApp.vieworder', [uiRouter])
-.config(routing)
-.component('vieworder', {
-  template: require('./vieworder.html'),
-  controller: vieworderComponent,
-  controllerAs: 'vm'
-})
+export default angular
+  .module('eatnjoyApp.vieworder', [uiRouter])
+  .config(routing)
+  .controller('orderDetailCtrl', [
+    'detail',
+    function (detail) {
+      var vm = this;
+      vm.detail = detail || {};
+    }
+  ])
+  .component('vieworder', {
+    template: require('./vieworder.html'),
+    controller: vieworderComponent,
+    controllerAs: 'vm'
+  })
   .name;
