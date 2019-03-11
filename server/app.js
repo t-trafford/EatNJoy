@@ -10,7 +10,8 @@ mongoose.Promise = require('bluebird');
 import config from './config/environment';
 import http from 'http';
 import seedDatabaseIfNeeded from './config/seed';
-
+import cors from 'cors';
+//add cors to do the cross site requests
 
 // Connect to MongoDB
 mongoose.connect(config.mongo.uri, config.mongo.options);
@@ -21,6 +22,7 @@ mongoose.connection.on('error', function(err) {
 
 // Setup server
 var app = express();
+app.use(cors());
 var server = http.createServer(app);
 var socketio = require('socket.io')(server, {
   serveClient: config.env !== 'production',
